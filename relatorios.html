@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>ModelHub</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo_ico.png">
+    <!-- Removendo Tone.js e FontAwesome se não forem usados nesta página, 
+         mas mantendo Chart.js e FontAwesome no corpo para melhor performance. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <a href="/mainpage.html">
+                <img src="img/minha_logo.png" alt="Meu Logotipo" class="logo_cabecalho">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="dark-mode-toggle" id="darkModeToggle" title="Alternar Modo Escuro">
+                <i class="fas fa-sun"></i> 
+            </div>
+            <h2>Relatórios</h2> 
+            <nav>
+                <ul>
+                    <li><a href="mainpage.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="aba_esquerda">
+            <nav> 
+                <ul>
+                    <li><a href="abrir_item.html">📝 Abrir Item</a></li> 
+                    <li><a href="preparar_item.html">🔪 Preparar Item</a></li>
+                    <li><a href="compras.html">🛒 Compras</a></li>
+                    <li><a href="financeiro.html">💰 Financeiro</a></li>
+                    <li class="active"><a href="relatorios.html">📊 Relatórios</a></li> 
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            
+            <h1>Geração de Relatórios</h1>
+            
+            <div class="content-section">
+                <h3>Configuração do Relatório</h3>
+                
+                <div class="controls">
+                    
+                    <label for="tipoRelatorio">Tipo de Relatório:</label>
+                    <select id="tipoRelatorio" class="control-select" style="max-width: 250px;">
+                        <option value="vendas_categoria">Vendas por Categoria</option>
+                        <option value="top_itens_vendidos">Top 10 Itens Vendidos</option>
+                        <option value="movimentacao_horaria">Movimentação Horária</option>
+                        <option value="compras_total">Total de Compras</option>
+                        <option value="compras_por_fornecedor">Compras por Fornecedor</option>
+                    </select>
+
+                    <label for="filtroDataInicial">De:</label>
+                    <input type="date" id="filtroDataInicial" class="control-select">
+
+                    <label for="filtroDataFinal">Até:</label>
+                    <input type="date" id="filtroDataFinal" class="control-select">
+                    
+                    <button id="btnGerarRelatorio" class="action-button" style="background-color: var(--primary-color);">
+                        Gerar Relatório
+                    </button>
+                    
+                    <button id="btnExportarRelatorio" class="action-button" style="background-color: var(--success-color);">
+                        Exportar CSV
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-section" id="relatorio-resultados" style="min-height: 400px;">
+                <h3>Resultado do Relatório</h3>
+                
+                <canvas id="relatorioChart" style="max-height: 350px;"></canvas>
+                
+                <div id="tabela-dados-brutos" class="table-responsive" style="margin-top: 30px;">
+                    <p id="msg-relatorio">Selecione o tipo de relatório e clique em "Gerar Relatório".</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+    <!-- CARREGAMENTO DE SCRIPTS (Otimizado) -->
+    
+    <!-- 1. Biblioteca de Gráficos (Dependência global) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- 2. Contêiner de Notificação (Deve vir antes do alerta_global.js) -->
+    <div id="notification-container"></div>
+    
+    <!-- 3. Scripts Modulares de Utilidade -->
+    <script type="module" src="js/alerta_global.js"></script>
+    <script type="module" src="js/darkmode.js"></script>
+    
+    <!-- 4. Script Principal (Deve vir por último, pois depende de tudo acima) -->
+    <script type="module" src="js/relatorios.js"></script>
+
+</body>
+</html>

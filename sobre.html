@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>ModelHub</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo_ico.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="darkmode.js"></script>
+</head>
+
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <a href="/mainpage.html">
+                <img src="img/minha_logo.png" alt="Meu Logotipo" class="logo_cabecalho">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="dark-mode-toggle" id="darkModeToggle" title="Alternar Modo Escuro">
+                <i class="fas fa-sun"></i> 
+            </div>
+            <h2>Visão Geral</h2> 
+            <nav>
+                <ul>
+                    <li><a href="mainpage.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="aba_esquerda">
+            <nav> 
+                <ul>
+                    <li><a href="abrir_item.html">📝 Abrir Item</a></li> 
+                    <li><a href="preparar_item.html">🔪 Preparar Item</a></li>
+                    <li><a href="compras.html">🛒 Compras</a></li>
+                    <li><a href="financeiro.html">💰 Financeiro</a></li>
+                    <li><a href="relatorios.html">📊 Relatórios</a></li> 
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <h1>Sobre o ModelHub</h1>
+            <p>Sistema Modelo para criação de novos sistemas.</p>
+            
+            <div class="content-section">
+                <h3>Como Utilizar:</h3>
+                <p>Copie o template em um novo diretório e começe a produção do sistema.</p>
+                
+                <p>Esse modelo deve ser seguido fielmente, a estrutura deste código não deve ser editado sem consulta prévia.</p>
+            </div>
+
+            <div class="content-section">
+                <h3>Funcionalidades BASE</h3>
+                <p>Este sistema unificado integra as seguintes áreas:</p>
+                <ul>
+                    <li><strong>Criação de demandas:</strong> Cria demandas a serem finalizadas por tela.</li>
+                    <li><strong>Consulta de cardápio e finalização de demandas:</strong> Acesso a um cardápio de produtos CSV. Painel de demandas em tempo real para a linha de produção.</li>
+                    <li><strong>Financeiro:</strong> Controle de fluxo de caixa, despesas, contas a pagar e projeções de lucro.</li>
+                    <li><strong>Relatórios:</strong> Análises de vendas, desempenho da equipe.</li>
+                </ul>
+            </div>
+
+            <div class="content-section">
+                <h3>Informações e Suporte</h3>
+                <p><strong>Versão do Sistema:</strong> 9.9.9 (Modelo)</p>
+                <p><strong>Desenvolvimento:</strong> Equipe de Tecnologia Interna ChefHub.</p>
+                <p><strong>Suporte:</strong> Para relatar bugs ou solicitar novas funcionalidades, entre em contato através da tela "Contato".</p>
+                <p>Todos os direitos reservados &copy; 2025 ConectHub.</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="notification-container"></div>
+    <script type="module" src="js/alerta_global.js"></script>
+    <script type="module" src="js/darkmode.js"></script>
+</body>
+
+</html>

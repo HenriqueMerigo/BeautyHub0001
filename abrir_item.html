@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>ModelHub</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo_ico.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <a href="/mainpage.html">
+                <img src="img/minha_logo.png" alt="Meu Logotipo" class="logo_cabecalho">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="dark-mode-toggle" id="darkModeToggle" title="Alternar Modo Escuro">
+                <i class="fas fa-sun"></i> 
+            </div>
+            <h2>Abrir Item</h2> 
+            <nav>
+                <ul>
+                    <li><a href="mainpage.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="aba_esquerda">
+            <nav> 
+                <ul>
+                    <li class="active"><a href="abrir_item.html">📝 Abrir Item</a></li> 
+                    <li><a href="preparar_item.html">🔪 Preparar Item</a></li>
+                    <li><a href="compras.html">🛒 Compras</a></li>
+                    <li><a href="financeiro.html">💰 Financeiro</a></li>
+                    <li><a href="relatorios.html">📊 Relatórios</a></li> 
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="controls">
+                <h3>Comandas Abertas</h3>
+                <button id="btnNovaComanda" class="new-order-button">Abrir Nova Comanda</button>
+            </div>
+
+            <div class="comanda-grid" id="comandasGrid">
+                <p>Carregando comandas...</p>
+            </div>
+
+            <div id="messageBox" class="message-box"></div>
+        </div>
+
+    </div> 
+    
+    <div id="modalAcoesComanda" class="modal">
+        <div class="modal-content large-modal">
+            <span class="close-button" onclick="fecharModal('modalAcoesComanda')">&times;</span>
+            <h3 id="modalAcoesTitle">Detalhes da Comanda #ID</h3>
+
+            <div id="comandaResumo">
+                </div>
+            
+            <hr>
+            
+        <h4>Itens da Comanda</h4>
+            <div class="table-responsive" style="width: 100%;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%; text-align: left; padding: 8px;">Qtd</th>
+                            <th style="width: 45%; text-align: left; padding: 8px;">Item</th>
+                            <th style="width: 15%; text-align: center; padding: 8px;">Preço</th>
+                            <th style="width: 15%; text-align: left; padding: 8px;">Status</th>
+                            <th style="width: 15%; text-align: center; padding: 8px;">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comandaItensBody">
+                        </tbody>
+                </table>
+            </div>
+
+            <hr>
+            
+            <div class="controls" style="justify-content: flex-end; border-bottom: none;">
+                <button id="btnAdicionarItensModal" class="action-button-secondary">Adicionar Mais Itens</button>
+                <div style="font-size: 1.5em; font-weight: bold; margin-right: 20px;">
+                    Total: R$ <span id="comandaTotalDisplay">0,00</span>
+                </div>
+                <button id="btnFecharContaModal" class="finish-button" data-id="">Fechar Conta</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalComanda" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="fecharModal('modalComanda')">&times;</span>
+            <h3 id="modalComandaTitle">Abrir Nova Comanda</h3>
+
+            <form id="formComanda">
+                <input type="hidden" id="comandaIdInput">
+                
+                <div class="form-group">
+                    <label for="mesaInput">Mesa/Comanda:</label>
+                    <input type="text" id="mesaInput" required placeholder="Ex: 101 ou 00" value="00">
+                </div>
+                
+                <div class="form-group">
+                    <label for="observacaoInput">Observação (Opcional):</label>
+                    <input type="text" id="observacaoInput" placeholder="Ex: Sem cebola, aniversariante">
+                </div>
+
+                <hr>
+
+                <h4>Itens Selecionados</h4>
+                <div class="table-responsive">
+                    <table style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Qtd</th>
+                                <th>Item</th>
+                                <th>Preço Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaItensComandaBody">
+                            </tbody>
+                    </table>
+                </div>
+
+                <div style="text-align: right; margin-top: 10px;">
+                    <div style="font-size: 1.5em; font-weight: bold;">
+                        Total: <span id="totalComandaDisplay">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="controls" style="justify-content: flex-end; border-bottom: none; margin-top: 20px;">
+                    <button type="button" class="action-button-secondary" onclick="abrirModalCardapio()">
+                        Adicionar/Editar Itens
+                    </button>
+                    <button type="submit" class="finish-button">Salvar Comanda</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<div id="modalCardapio" class="modal">
+        <div class="modal-content huge-modal" style="display: flex; flex-direction: column; width: 90%; max-width: 1200px; min-width: 800px; height: 90vh; max-height: 900px;">
+            <span class="close-button" onclick="fecharModal('modalCardapio')">&times;</span>
+            <h3>Seleção de Itens do Cardápio</h3>
+            
+            <div class="cardapio-interface-container" style="display: flex; flex-grow: 1; gap: 20px; width: 100%;">
+                <div class="cardapio-left" style="flex: 2; min-width: 450px; display: flex; flex-direction: column;">
+                    <div class="cardapio-controls" style="flex-shrink: 0;">
+                        <div class="filter-group">
+                            <label for="categorySelect">Filtrar por Categoria:</label>
+                            <select id="categorySelect" class="control-select">
+                                </select>
+                        </div>
+                        <div class="search-group">
+                            <label for="cardapioSearch">Buscar por Nome:</label>
+                            <input type="text" id="cardapioSearch" placeholder="Digite para buscar..." class="control-input" />
+                        </div>
+                    </div>
+
+                    <div id="cardapioItemsContainer" class="cardapio-items-container" style="max-height: calc(90vh - 250px); overflow-y: auto;">
+                        </div>
+                </div>
+
+                <div class="cardapio-right" style="flex: 1; min-width: 300px; display: flex; flex-direction: column;">
+                    <h4 style="margin-bottom: 10px;">Resumo da Seleção</h4> <div class="table-responsive" style="max-height: calc(90vh - 250px); overflow-y: auto;">
+                        <table id="resumoSelecaoTable" style="width: 100%; border-collapse: collapse;"> <thead>
+                                <tr>
+                                    <th style="width: 10%; text-align: left; padding: 8px;">Qtd</th>
+                                    <th style="width: 50%; text-align: left; padding: 8px;">Item</th>
+                                    <th style="width: 20%; text-align: right; padding: 8px;">Total</th>
+                                    <th style="width: 20%; text-align: center; padding: 8px;">Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resumoSelecaoBody">
+                                    </tbody>
+                            </table>
+                        </div>
+                    
+                    <div class="total-summary" style="padding-top: 10px; border-top: 1px solid #eee; flex-shrink: 0;">
+                        <span id="resumoSelecaoTotal">Total: R$ 0,00</span>
+                    </div>
+
+                    <button id="btnAdicionarItensCardapio" class="action-button" style="width: 100%; margin-top: 20px; flex-shrink: 0;">
+                        Adicionar ao Resumo da Comanda
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+    <script type="module" src="js/alerta_global.js"></script>
+    <script type="module" src="js/darkmode.js"></script>
+    <script type="module" src="js/abrir_item.js"></script> 
+</body>
+</html>

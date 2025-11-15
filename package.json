@@ -1,0 +1,17 @@
+{
+  "name": "chefhub",
+  "version": "1.0.0",
+  "description": "API e servidor para o sistema ChefHub de gerenciamento de restaurante.",
+  "main": "server.js",        
+  "type": "module",           
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["chefhub", "restaurante", "pdv", "nodejs", "express"],
+  "author": "Henrique Merigo",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+    }
+}

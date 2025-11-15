@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>ModelHub</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <!-- Adicionado para carregar o FA corretamente -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="img/logo_ico.png">
+    <!-- Removido o Tone.min.js, pois não é usado nesta tela -->
+</head>
+
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <a href="/mainpage.html">
+                <img src="img/minha_logo.png" alt="Meu Logotipo" class="logo_cabecalho">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="dark-mode-toggle" id="darkModeToggle" title="Alternar Modo Escuro">
+                <i class="fas fa-sun"></i> 
+            </div>
+            <h2>Financeiro</h2> 
+            <nav>
+                <ul>
+                    <li><a href="mainpage.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="aba_esquerda">
+            <nav> 
+                <ul>
+                    <li><a href="abrir_item.html">📝 Abrir Item</a></li> 
+                    <li><a href="preparar_item.html">🔪 Preparar Item</a></li>
+                    <li><a href="compras.html">🛒 Compras</a></li>
+                    <li class="active"><a href="financeiro.html">💰 Financeiro</a></li>
+                    <li><a href="relatorios.html">📊 Relatórios</a></li> 
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            
+            <h1>Fluxo de Caixa e Transações</h1>
+            
+            <!-- Dashboard de Métricas -->
+            <div class="metrics-summary">
+                
+                <div class="metric-card success">
+                    <div class="metric-icon"><i class="fas fa-arrow-up"></i></div>
+                    <div class="metric-details">
+                        <span class="metric-label">Total de Entradas (Receita)</span>
+                        <span class="metric-value" id="totalEntradasDisplay">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="metric-card danger">
+                    <div class="metric-icon"><i class="fas fa-arrow-down"></i></div>
+                    <div class="metric-details">
+                        <span class="metric-label">Total de Saídas (Compras)</span>
+                        <span class="metric-value" id="totalSaidasDisplay">R$ 0,00</span>
+                    </div>
+                </div>
+
+                <div class="metric-card primary" id="lucroCard">
+                    <div class="metric-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="metric-details">
+                        <span class="metric-label">Resultado (Lucro / Prejuízo)</span>
+                        <span class="metric-value" id="totalLucroDisplay">R$ 0,00</span>
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="content-section">
+                <h3>Detalhamento das Transações</h3>
+                
+                <!-- Filtros e Exportação -->
+                <div class="controls">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <label for="filtroDataInicial">De:</label>
+                        <input type="date" id="filtroDataInicial" class="control-select">
+    
+                        <label for="filtroDataFinal">Até:</label>
+                        <input type="date" id="filtroDataFinal" class="control-select">
+                        
+                        <button id="btnFiltrar" class="action-button" style="background-color: var(--primary-color);">
+                            <i class="fas fa-filter"></i> Filtrar
+                        </button>
+                    </div>
+                    
+                    <button id="btnExportarCSV" class="action-button" style="background-color: var(--success-color);">
+                        <i class="fas fa-file-csv"></i> Exportar CSV
+                    </button>
+                </div>
+
+                <!-- Tabela de Transações -->
+                <div class="table-responsive">
+                    <table id="tabelaTransacoes" class="bordered-table cardapio-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 15%; text-align: left;">Data</th>
+                                <th style="width: 15%; text-align: left;">Tipo</th>
+                                <th style="width: 45%; text-align: left;">Descrição</th>
+                                <th style="width: 15%; text-align: right;">Valor (R$)</th>
+                                <!-- Coluna de Ações agora é menor, pois só terá a Lixeira -->
+                                <th style="width: 10%; text-align: center;">Ações</th> 
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaFinanceiraBody"> 
+                            <tr><td colspan="5">Carregando dados...</td></tr> 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Os modais modalConferencia e modalDetalheCompra foram REMOVIDOS daqui. -->
+
+    <!-- Elemento para exibir alertas globais -->
+    <div id="notification-container"></div>
+    
+    <!-- Scripts -->
+    <script>
+        // Função fecharModal (necessária para os alertas globais)
+        function fecharModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) {
+                modal.style.display = 'none'; 
+            }
+        }
+    </script>
+    <script type="module" src="js/alerta_global.js"></script>
+    <script type="module" src="js/darkmode.js"></script>
+    <script type="module" src="js/financeiro.js"></script>
+</body>
+</html>

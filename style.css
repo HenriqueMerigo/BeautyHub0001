@@ -1,0 +1,975 @@
+/* ========================================================================= */
+/* 1. VARIÁVEIS GLOBAIS E DARK MODE */
+/* ========================================================================= */
+:root {
+    /* Cores de Ação (FIXAS - Não mudam no Dark Mode) */
+    --primary-color: #1e88e5;       /* Azul Principal (Ação/Destaque) */
+    --secondary-color-fixed: #32465b; /* Azul/Cinza (Textos fortes, Números) */
+    --success-color: #2ecc71;       /* Verde */
+    --warning-color: #f39c12;       /* Laranja */
+    --danger-color: #e74c3c;        /* Vermelho */
+    --ready-color: #5a2222;         /* Ciano/Verde (Status Pronto) */
+    --secondary-color: #bd16bd;
+    
+    /* VARIÁVEIS DINÂMICAS (LIGHT MODE PADRÃO) */
+    --bg-page: #F0F0F0;             /* Fundo Claro da Página */
+    --bg-content: #ffffff;          /* Fundo Branco de Cards/Conteúdo */
+    --bg-header: var(--primary-color); /* Fundo do Header (Pode ser primary) */
+    --bg-header-left: #32465b;      /* Azul/Cinza do Header Left */
+    --bg-sidebar: #2b3b4c;          /* Azul/Cinza da Sidebar */
+    --bg-hover-sidebar: #476a3e;    /* Cor do Hover na Sidebar */
+    --text-primary: #333;           /* Cor Padrão do Texto Escuro */
+    --text-secondary: #555;         /* Cor para labels/dicas */
+    --text-light: #ffffff;          /* Cor Padrão do Texto Claro */
+    --border-color: #eee;           /* Cor de bordas/separadores leves */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra padrão */
+    --shadow-strong: rgba(0, 0, 0, 0.2); /* Sombra forte */
+    --hover-bg-light: #f5f5f5;      /* Fundo de hover de tabela/card leve */
+    --alternate-row-background: #fcfcfc; /* Fundo alternativo mais leve para formulários/cards */
+
+    /* Dimensões */
+    --header-height: 80px;
+    --sidebar-width: 260px;
+    --spacing-default: 20px;
+}
+
+/* DARK MODE */
+body.dark-mode {
+    --bg-page: #121212;             /* Fundo Escuro da Página */
+    --bg-content: #1e1e1e;          /* Fundo Escuro de Cards/Conteúdo */
+    --bg-header: #1e1e1e;           /* Header mais escuro no DM */
+    --bg-header-left: #2c2c2c;      /* Header Left mais escuro */
+    --bg-sidebar: #2c2c2c;          /* Sidebar mais escura */
+    --bg-hover-sidebar: #444;       /* Cor do Hover na Sidebar */
+    --text-primary: #f4f4f4;        /* Texto principal claro */
+    --text-secondary: #b0b0b0;      /* Texto secundário/dica claro */
+    --text-light: #ffffff;          /* Cor Padrão do Texto Claro */
+    --border-color: #333;           /* Borda escura para separação */
+    --shadow-color: rgba(255, 255, 255, 0.05); /* Sombra mais sutil no DM */
+    --shadow-strong: rgba(0, 0, 0, 0.4); 
+    --hover-bg-light: #262626;      /* Fundo de hover escuro */
+    --alternate-row-background: #232323; /* Fundo alternativo mais escuro para formulários/cards */
+}
+
+
+/* ========================================================================= */
+/* 2. RESET E CONFIGURAÇÕES BASE */
+/* ========================================================================= */
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Aplicação das variáveis de fundo e texto (com transição suave) */
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    transition: background-color 0.5s, color 0.5s;
+}
+a {
+    text-decoration: none;
+    color: var(--primary-color); /* Link colora com o primário */
+}
+h1, h2, h3 {
+    margin-top: 0;
+    color: var(--text-primary); /* Garante que títulos mudem de cor */
+}
+h3 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--border-color);
+    margin-top: 0;
+    padding-bottom: 5px;
+}
+
+/* ========================================================================= */
+/* 3. LAYOUT PRINCIPAL (HEADER, SIDEBAR, MAIN) */
+/* ========================================================================= */
+header {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--bg-header); /* VARIÁVEL DINÂMICA */
+    color: var(--text-light);
+    box-shadow: 0 2px 4px var(--shadow-color);
+    z-index: 100;
+}
+
+.main-container {
+    display: flex;
+    height: calc(100% - var(--header-height));
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    width: var(--sidebar-width);
+    padding: 0 var(--spacing-default);
+    box-sizing: border-box;
+    background-color: var(--bg-header-left); /* VARIÁVEL DINÂMICA */
+    color: var(--text-light);
+}
+
+.logo_cabecalho {
+    width: 220px;
+}
+
+.header-right {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+
+.header-right h2 {
+    font-size: 1.3em;
+    font-weight: 300;
+    margin: 0;
+    color: var(--text-light);
+}
+
+/* Dark Mode Toggle Switch (Botão de Sol/Lua) */
+.dark-mode-toggle {
+    position: absolute;
+    left: 1%;
+    bottom: -1100%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 10px;
+    border-radius: 50%; 
+    color: var(--text-light); 
+    transition: background-color 0.3s;
+}
+.dark-mode-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+
+/* Navegação do Header */
+.header-right nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.header-right nav ul li {
+    margin-left: var(--spacing-default);
+}
+.header-right nav ul li a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-weight: 500;
+    transition: color 0.3s;
+    padding: 10px 5px;
+    display: block;
+}
+.header-right nav ul li a:hover {
+    color: #bbdefb; /* Cor de hover fixa no header (claro) */
+}
+
+
+/* BARRA LATERAL (SIDEBAR) */
+.aba_esquerda {
+    display: flex;
+    flex-direction: column;
+    min-width: var(--sidebar-width);
+    height: 100%;
+    overflow-y: auto;
+    background-color: var(--bg-sidebar); /* VARIÁVEL DINÂMICA */
+    color: var(--text-light);
+    box-shadow: 2px 0 5px var(--shadow-color);
+}
+.aba_esquerda nav ul {
+    margin-top: 25px;
+    list-style: none;
+    padding: 0;
+}
+.aba_esquerda nav ul li a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 25px;
+    padding: 20px var(--spacing-default);
+    display: block;
+    transition: background-color 0.3s;
+}
+.aba_esquerda nav ul li a:hover {
+    background-color: var(--bg-hover-sidebar); /* VARIÁVEL DINÂMICA */
+}
+.aba_esquerda nav ul li.active a {
+    background-color: var(--primary-color);
+    font-weight: 600;
+}
+
+
+/* CONTEÚDO PRINCIPAL E SEÇÕES GERAIS */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: var(--bg-page); /* Fundo da página, para criar margem visual */
+    overflow-y: auto;
+}
+.content-section, .dashboard-section {
+    margin-bottom: 30px;
+    padding: var(--spacing-default);
+    background-color: var(--bg-content); /* Fundo de card/seção */
+    border-radius: 8px;
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+
+/* ========================================================================= */
+/* 4. ESTILOS DE TABELAS */
+/* ========================================================================= */
+.table-responsive {
+    width: 100%; /* Garante que o contêiner do responsive ocupe 100% do pai */
+    overflow-x: auto; /* Permite scroll horizontal se a tabela for muito larga */
+}
+.main-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+.main-content table thead th {
+    background-color: var(--primary-color); 
+    color: var(--text-light);
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    border: none;
+}
+.main-content table tbody tr {
+    border-bottom: 1px solid var(--border-color); 
+    transition: background-color 0.2s;
+}
+.main-content table tbody tr:hover {
+    background-color: var(--hover-bg-light); /* VARIÁVEL DINÂMICA */
+}
+.main-content table tbody td {
+    padding: 10px 15px;
+    color: var(--text-primary);
+}
+/* Estilos para tabelas com bordas internas (como Cardápio/Comanda) */
+#cardapioData table, #tabelaItensComanda table, #cardapioSelector table, #comandaItensBody table,
+.bordered-table {
+    border: 1px solid var(--border-color); 
+}
+#cardapioData th, #cardapioData td, #tabelaItensComanda th, #tabelaItensComanda td, 
+#cardapioSelector th, #cardapioSelector td, #comandaItensBody th, #comandaItensBody td,
+.bordered-table th, .bordered-table td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    text-align: left;
+}
+
+/* Estilo para a tabela de resultados do relatório */
+.tabela-relatorio {
+    width: 100%;
+    border-collapse: separate; /* Permite bordas arredondadas e espaçamento */
+    border-spacing: 0 5px; /* Espaçamento entre as linhas */
+    box-shadow: 0 2px 5px var(--shadow-color);
+    background-color: var(--bg-content); /* Fundo da tabela (varia com DM) */
+    border-radius: 8px;
+    overflow: hidden; /* Garante que bordas arredondadas funcionem */
+    margin-top: 15px; /* Espaçamento do título/gráfico */
+}
+
+.tabela-relatorio thead {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-size: 0.95em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tabela-relatorio th {
+    background-color: var(--primary-color) !important;
+    padding: 12px 15px;
+    font-weight: 600;
+    border: none;
+}
+
+.tabela-relatorio tbody tr {
+    background-color: var(--hover-bg-light);
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+}
+
+.tabela-relatorio tbody tr:hover {
+    background-color: var(--hover-bg-light); /* Utiliza hover dinâmico */
+}
+
+.tabela-relatorio td {
+    padding: 10px 15px;
+    border: none; /* Remove bordas internas nas células */
+    font-size: 0.9em;
+    color: var(--text-primary);
+}
+
+
+/* Estilo para a mensagem antes de gerar o relatório */
+#msg-relatorio {
+    text-align: center;
+    padding: 50px;
+    color: var(--text-secondary); /* Cor secundária (varia com DM) */
+    font-style: italic;
+}
+
+
+/* ========================================================================= */
+/* 5. ESTILOS DE CONTROLES E BOTÕES (UNIFICADOS) */
+/* ========================================================================= */
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    justify-content: space-between; 
+}
+.controls label {
+    font-weight: 500;
+    color: var(--text-secondary); /* Cor secundária */
+}
+.controls input[type="text"],
+.controls input[type="date"],
+.control-select,
+.form-group input,
+.form-group select,
+.form-group textarea { /* Incluído textarea para estilo base */
+    padding: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1em;
+    box-sizing: border-box;
+    background-color: var(--bg-content); /* Garante fundo correto no DM */
+    color: var(--text-primary);
+    max-width: 100%; /* Garante responsividade em telas pequenas */
+    min-width: 150px; /* Evita que fique muito pequeno */
+}
+
+/* Base para todos os botões de Ação */
+.action-button, button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-right: 5px;
+}
+.action-button:active, button:active {
+    transform: scale(0.98);
+}
+
+/* Primary/Default (e Filtro) */
+.action-button-primary, 
+#btnFiltrar, 
+.new-order-button, 
+.btn-start {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+.action-button-primary:hover, 
+#btnFiltrar:hover, 
+.new-order-button:hover, 
+.btn-start:hover {
+    background-color: #1565c0; 
+}
+
+/* Success/Finish/Export */
+#btnExportarCSV, 
+.finish-button, 
+.btn-finish {
+    background-color: var(--success-color);
+    color: var(--text-light);
+}
+#btnExportarCSV:hover, 
+.finish-button:hover, 
+.btn-finish:hover {
+    background-color: #27ae60;
+}
+
+/* Warning/Secondary/Edit */
+.edit-button, 
+.action-button-secondary {
+    background-color: var(--warning-color);
+    color: var(--text-light);
+}
+.edit-button:hover, 
+.action-button-secondary:hover {
+    background-color: #e67e22;
+}
+
+/* Danger/Delete/Cancel */
+.delete-button,
+.remove-item-button,
+.cancel-button {
+    background-color: var(--danger-color);
+    color: var(--text-light);
+}
+.delete-button:hover,
+.remove-item-button:hover,
+.cancel-button:hover {
+    background-color: #c0392b;
+}
+
+
+/* ========================================================================= */
+/* 6. COMANDAS (CARDS E GRID) */
+/* ========================================================================= */
+
+.comanda-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: var(--spacing-default);
+    margin-top: 20px;
+}
+.comanda-card {
+    background-color: var(--bg-content); /* VARIÁVEL DINÂMICA */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    cursor: pointer;
+    border: 2px solid transparent; 
+    transition: all 0.3s;
+}
+.comanda-card:hover {
+    box-shadow: 0 4px 8px var(--shadow-strong);
+    transform: translateY(-2px);
+}
+
+/* Cores de Status para a Borda do Card */
+.status-new { border-color: var(--primary-color); }
+.status-preparing { border-color: var(--warning-color); }
+.status-ready { border-color: var(--success-color); } 
+
+.comanda-header, .comanda-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.comanda-details { margin-top: 10px; }
+.status-text { margin: 8px 0; font-size: 0.95em; color: var(--text-secondary); }
+.table-number {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: var(--secondary-color-fixed); /* Cor fixa para destaque */
+}
+.comanda-total {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+
+/* ========================================================================= */
+/* 7. ESTILOS DE DASHBOARD (Cards de Estatísticas - mainpage.html) */
+/* ========================================================================= */
+
+.metrics-summary.status-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-default);
+    margin-bottom: var(--spacing-default);
+}
+
+.metric-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-content);
+    padding: var(--spacing-default);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    border-left: 5px solid transparent; /* Inicialmente transparente, cor vem da classe */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px var(--shadow-strong);
+}
+
+.metric-icon {
+    font-size: 2.5em;
+    padding-right: 15px;
+}
+
+.metric-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.metric-label {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-bottom: 3px;
+}
+
+.metric-value {
+    font-size: 1.6em;
+    font-weight: 700;
+    color: var(--text-primary); /* Padrão. A cor principal será definida pela borda. */
+}
+
+/* Mapeamento de Cores Dinâmicas para Metric Cards */
+.metric-card.primary { border-color: var(--primary-color); }
+.metric-card.primary .metric-icon, 
+.metric-card.primary .metric-value { color: var(--primary-color); }
+
+.metric-card.secondary { border-color: var(--secondary-color); }
+.metric-card.secondary .metric-icon, 
+.metric-card.secondary .metric-value { color: var(--secondary-color); }
+
+.metric-card.warning { border-color: var(--warning-color); }
+.metric-card.warning .metric-icon,
+.metric-card.warning .metric-value { color: var(--warning-color); }
+
+.metric-card.danger { border-color: var(--danger-color); }
+.metric-card.danger .metric-icon,
+.metric-card.danger .metric-value { color: var(--danger-color); }
+
+.metric-card.success { border-color: var(--success-color); }
+.metric-card.success .metric-icon,
+.metric-card.success .metric-value { color: var(--success-color); }
+
+
+/* ========================================================================= */
+/* 7.1. ESTILOS DE AÇÕES RÁPIDAS (Quick Actions - mainpage.html) */
+/* ========================================================================= */
+.quick-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-default);
+    margin-bottom: var(--spacing-default);
+}
+
+.quick-action-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--text-light); /* Cor do texto dentro do botão será clara */
+    transition: transform 0.2s, opacity 0.2s;
+    min-height: 100px;
+}
+
+.quick-action-button i {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: var(--text-light);
+}
+
+.quick-action-button:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Mapeamento das Cores para os Botões */
+.quick-action-button.new-order-color { background-color: var(--primary-color); }
+.quick-action-button.kitchen-color { background-color: var(--secondary-color-fixed); }
+.quick-action-button.finance-color { background-color: var(--success-color); }
+.quick-action-button.report-color { background-color: var(--warning-color); }
+
+
+/* ========================================================================= */
+/* 8. MODAIS E FORMULÁRIOS (UNIFICADOS) */
+/* ========================================================================= */
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1000; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6); 
+    align-items: center; 
+    justify-content: center; 
+}
+.modal-content {
+    background-color: var(--bg-content); /* VARIÁVEL DINÂMICA */
+    padding: 20px;
+    width: 80%; 
+    max-width: 800px;
+    box-shadow: 0 4px 12px var(--shadow-strong);
+    border-radius: 8px;
+    margin: auto; 
+}
+
+.small-modal { max-width: 500px; } /* Adicionado para modais menores (Fornecedor/Compra) */
+.large-modal { max-width: 900px; width: 90%; }
+.huge-modal {
+    max-width: 1200px;
+    width: 90%;
+    height: 90vh; 
+    max-height: 800px; 
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+}
+
+.close-button {
+    color: var(--text-secondary); 
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.close-button:hover {
+    color: var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 10px; /* Base para o espaçamento dos formulários */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+
+/* ========================================================================= */
+/* 9. MÓDULOS ESPECÍFICOS (CARDÁPIO E COZINHA) */
+/* ========================================================================= */
+
+/* Cardápio Modal (huge-modal) */
+.cardapio-interface-container {
+    display: flex;
+    gap: 20px; /* Espaçamento entre as duas colunas (esquerda e direita) */
+    /* Se for necessário que ele ocupe 100% da largura do pai: */
+    width: 100%; 
+    /* Se ele tiver um flex-direction: column; você precisará mudar para row para as colunas */
+}
+.cardapio-left {
+    flex-grow: 1;       /* Permite que ele cresça */
+    flex-shrink: 0;     /* Impede que ele encolha */
+    flex-basis: 500px;  /* Largura mínima desejada */
+}
+
+.cardapio-right {
+    flex-grow: 1;       /* Permite que ele cresça */
+    flex-shrink: 0;     /* Impede que ele encolha */
+    flex-basis: 350px;  /* Largura mínima desejada para o resumo */
+    /* Ou, se você quiser uma largura fixa para ele: */
+    /* width: 350px; */ 
+}
+.cardapio-items-container {
+    flex: 1; 
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    overflow-y: auto; 
+    padding-right: 5px; 
+}
+
+/* Card de Item do Cardápio */
+.item-card-clickable {
+    background-color: var(--bg-content);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px var(--shadow-color);
+}
+.item-card-clickable:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+}
+.item-card-clickable.selected {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border-color: #1565c0;
+    font-weight: bold;
+}
+.item-info { flex-grow: 1; }
+.item-name { font-size: 1em; font-weight: 500; }
+.item-price { font-size: 0.9em; opacity: 0.8; }
+.item-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+}
+.item-qty-indicator {
+    padding: 3px 8px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 0.9em;
+}
+.total-summary {
+    margin-top: auto; 
+    padding-top: 15px;
+    border-top: 2px solid var(--border-color);
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: right;
+}
+
+/* Controles Cardápio/Filtros */
+.cardapio-controls {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 15px;
+    flex-wrap: wrap; 
+}
+.filter-group, .search-group { display: flex; flex-direction: column; }
+.filter-group { flex: 1; min-width: 200px; }
+.search-group { flex: 1; min-width: 250px; }
+.cardapio-controls label { font-weight: 600; margin-bottom: 5px; color: var(--text-secondary); }
+
+
+/* Estilos de Cozinha (KDS) */
+.kitchen-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+.filter-button {
+    padding: 8px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-content);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+.filter-button:hover {
+    background-color: var(--hover-bg-light);
+}
+.filter-button.active {
+    background-color: var(--secondary-color-fixed); 
+    color: var(--text-light);
+    border-color: var(--secondary-color-fixed);
+    font-weight: 700;
+}
+.kitchen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 20px;
+    margin-top: 20px;
+}
+.comanda-cozinha-card {
+    background-color: var(--bg-content);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    border-left: 5px solid var(--primary-color);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.mesa-info {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: var(--secondary-color-fixed);
+}
+.time-info {
+    font-size: 0.9em;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    display: block;
+}
+.observacao {
+    background-color: var(--warning-color); 
+    color: var(--text-light);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    font-weight: 600;
+    border: 1px solid var(--warning-color);
+}
+.itens-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+.itens-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px dashed var(--border-color);
+    font-size: 1.1em;
+}
+.item-qty {
+    font-weight: 700;
+    width: 30px;
+}
+
+/* Status Tags */
+.status-tag {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    font-weight: 700;
+    color: white;
+    margin-left: 10px;
+}
+.status-preparo { background-color: var(--warning-color); }
+.status-pronto { background-color: var(--ready-color); }
+.status-entregue { background-color: #6c757d; }
+
+
+/* ========================================================================= */
+/* 10. ESTILOS DE NOTIFICAÇÕES (Alertas Visuais) */
+/* ========================================================================= */
+
+#notification-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1100; /* Acima dos modais (1000) */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none; /* Permite clicar através do contêiner vazio */
+}
+
+.notification-message {
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow-strong);
+    color: white; /* Texto sempre claro nas notificações */
+    font-weight: 600;
+    font-size: 1em;
+    opacity: 0.95;
+    min-width: 250px;
+    max-width: 350px;
+    pointer-events: all; /* Permite interação com a mensagem */
+    animation: slideIn 0.5s ease-out;
+}
+
+/* Cores das Notificações (Baseadas em Ações) */
+.notification-success {
+    background-color: var(--success-color);
+}
+.notification-warning {
+    background-color: var(--warning-color);
+}
+.notification-error {
+    background-color: var(--danger-color);
+}
+.notification-info {
+    background-color: var(--primary-color);
+}
+
+/* Animação para a notificação deslizar da direita */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 0.95;
+    }
+}
+
+
+/* ========================================================================= */
+/* 11. MELHORIAS NA TELA DE COMPRAS E FORNECEDORES (NOVO) */
+/* ========================================================================= */
+
+/* --- Estilo de Formulários (Modal) - Requisito 1 --- */
+
+/* Estilo para dar um toque mais organizado e profissional ao modal */
+.modal-content .form-improved {
+    padding: 15px 20px;
+    margin: -10px 0 10px 0; /* Ajusta o padding do modal-body */
+    /* Usa uma cor de fundo mais suave para diferenciar o formulário */
+    background-color: var(--alternate-row-background); 
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05); /* Sombra interna sutil */
+}
+
+/* Aumenta a distância entre os campos do formulário (Requisito 1) */
+.modal-content .form-improved .form-group {
+    margin-bottom: 18px; /* Aumenta a distância para 18px */
+}
+
+/* Estilo para Textareas com tamanho fixo e scroll (Requisito 2) */
+.modal-content .fixed-textarea {
+    resize: vertical; /* Permite redimensionamento vertical pelo usuário */
+    min-height: 50px; /* Altura mínima */
+    max-height: 150px; /* Limite de altura */
+    overflow-y: auto; /* Adiciona scroll vertical se o conteúdo exceder */
+    line-height: 1.4; /* Melhora a legibilidade */
+}
+
+/* --- Alinhamento da Tabela de Ações - Requisito 4 --- */
+
+/* Centraliza os títulos da coluna Ações */
+#tabelaFornecedores th:last-child,
+#tabelaCompras th:last-child {
+    text-align: center;
+}
+
+/* Centraliza o conteúdo da célula de Ações e alinha os botões lado a lado */
+#tabelaFornecedores td:last-child,
+#tabelaCompras td:last-child {
+    text-align: center;
+    /* Usa flexbox para centralizar os botões dentro da célula */
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 8px; /* Espaçamento entre botões */
+}
+
+/* Padroniza os botões de Ação na tabela (para garantir que excluir seja vermelho) */
+.edit-fornecedor-button, .edit-compra-button, .edit-item-btn {
+    /* Usando a cor de Warning para Edição */
+    background-color: var(--warning-color); 
+    color: var(--text-light);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    margin: 0; /* Remove margem extra */
+}
+
+.delete-fornecedor-button, .delete-compra-button, .delete-item-btn {
+    /* Usando a cor de Danger para Exclusão (Requisito 4) */
+    background-color: var(--danger-color); 
+    color: var(--text-light);
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    margin: 0; /* Remove margem extra */
+}
+
+/* Fim das Melhorias de Compras */

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>ModelHub</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo_ico.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <a href="/mainpage.html">
+                <img src="img/minha_logo.png" alt="Meu Logotipo" class="logo_cabecalho">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="dark-mode-toggle" id="darkModeToggle" title="Alternar Modo Escuro">
+                <i class="fas fa-sun"></i> 
+            </div>
+            <h2>Preparar Item</h2> 
+            <nav>
+                <ul>
+                    <li><a href="mainpage.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="aba_esquerda">
+            <nav> 
+                <ul>
+                    <li><a href="abrir_item.html">📝 Abrir Item</a></li> 
+                    <li class="active"><a href="preparar_item.html">🔪 Preparar Item</a></li>
+                    <li><a href="compras.html">🛒 Compras</a></li>
+                    <li><a href="financeiro.html">💰 Financeiro</a></li>
+                    <li><a href="relatorios.html">📊 Relatórios</a></li> 
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <div class="controls">
+                <h3>Comandas em Preparação</h3>
+                <button id="btnAcessarCardapio" class="action-button-primary" style="background-color: var(--secondary-color);">
+                    <i class="fas fa-utensils"></i> Gerenciar Cardápio
+                </button>
+            </div>
+            
+            <div class="kitchen-grid" id="cozinhaGrid">
+                <p>Carregando comandas...</p>
+            </div>
+        </div>
+
+    </div> 
+    
+    <div id="cardapioModal" class="modal">
+        <div class="modal-content medium-modal">
+            <div class="modal-header">
+                <h2>Gerenciamento de Cardápio</h2>
+                <button id="btnNovoItemCardapio" class="action-button-primary">
+                    <i class="fas fa-plus"></i> Novo Item
+                </button>
+                <span class="close-button" onclick="fecharModal('cardapioModal')">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table id="tabelaCardapio" class="bordered-table cardapio-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome do Item</th>
+                                <th>Categoria</th> 
+                                <th>Preço</th>
+                                <th class="text-center">Ações</th> </tr>
+                        </thead>
+                        <tbody id="tabelaCardapioBody">
+                            <tr><td colspan="5">Carregando Cardápio...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+    </div>
+
+    <div id="itemFormModal" class="modal">
+        <div class="modal-content small-modal">
+            <div class="modal-header">
+                <h2 id="modalCardapioTitle">Adicionar Novo Item</h2>
+                <span class="close-button" onclick="fecharModal('itemFormModal')">&times;</span>
+            </div>
+            
+            <div class="modal-body">
+                <form id="formCardapio">
+                    <input type="hidden" id="itemId" name="id"> 
+
+                    <div class="form-group">
+                        <label for="itemNome">Nome do Prato:</label>
+                        <input type="text" id="itemNome" name="nome" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="itemCategoria">Categoria:</label>
+                        <input type="text" id="itemCategoria" name="categoria" required placeholder="Ex: Bebidas, Pratos">
+                    </div>
+                    <div class="form-group">
+                        <label for="itemPreco">Preço (R$):</label>
+                        <input type="number" id="itemPreco" name="preco" step="0.01" min="0.01" required> 
+                    </div>
+
+                    <div class="modal-actions" style="justify-content: flex-end; margin-top: 20px;">
+                        <button type="button" id="btnVoltarItemForm" class="action-button-secondary">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </button>
+                        <button type="submit" id="btnSalvarItem" class="action-button-primary" style="background-color: var(--success-color);">
+                            <i class="fas fa-save"></i> Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification-container"></div>
+    <script type="module" src="js/alerta_global.js"></script>
+    <script type="module" src="js/darkmode.js"></script>
+    <script type="module" src="js/preparar_item.js"></script>
+</body>
+</html>

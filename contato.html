@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>ChefHub - Contato</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo_ico.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="darkmode.js"></script>
+    <style>
+        .contact-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .contact-list li {
+            border-left: 5px solid #1e88e5; /* Cor primária */
+            padding-left: 15px;
+        }
+
+        .contact-list strong {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+            color: var(--text-lite);
+        }
+
+        .contact-link {
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .email-link { color: #1e88e5; } /* Azul */
+        .whatsapp-link { color: #25d366; } /* Verde WhatsApp */
+        .instagram-link { color: #c13584; } /* Rosa/Roxo Instagram */
+
+        .contact-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <a href="mainpage.html">
+                <img src="img/minha_logo.png" alt="Meu Logotipo" class="logo_cabecalho">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="dark-mode-toggle" id="darkModeToggle" title="Alternar Modo Escuro">
+                <i class="fas fa-sun"></i> 
+            </div>
+            <h2>Contato</h2> 
+            <nav>
+                <ul>
+                    <li><a href="mainpage.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html" class="active">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="aba_esquerda">
+            <nav> 
+                <ul>
+                    <li><a href="abrir_item.html">📝 Abrir Item</a></li> 
+                    <li><a href="preparar_item.html">🔪 Preparar Item</a></li>
+                    <li><a href="compras.html">🛒 Compras</a></li>
+                    <li><a href="financeiro.html">💰 Financeiro</a></li>
+                    <li><a href="relatorios.html">📊 Relatórios</a></li> 
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            <h1>Canais de Contato e Suporte</h1>
+            <p>Utilize um de nossos canais diretos abaixo para falar com a equipe ConectHub. Estamos prontos para te ajudar!</p>
+
+            <div class="content-section">
+                <h3>Suporte Rápido e Atendimento</h3>
+                
+                <ul class="contact-list">
+                    <li>
+                        <strong>E-mail de Suporte</strong>
+                        <a href="mailto:suporteconecthub@gmail.com.br" class="contact-link email-link">suporteconecthub@gmail.com.br</a>
+                        <p class="contact-description">Para dúvidas técnicas, relatórios de bugs e assistência com o sistema.</p>
+                    </li>
+                    
+                    <!-- E-mail Comercial -->
+                    <li>
+                        <strong>E-mail Comercial</strong>
+                        <a href="mailto:comercialconecthub@gmail.com.br" class="contact-link email-link">comercialconecthub@gmail.com.br</a>
+                        <p class="contact-description">Para propostas, parcerias e informações sobre vendas.</p>
+                    </li>
+                    
+                    <!-- WhatsApp -->
+                    <li>
+                        <strong>WhatsApp (Suporte e Vendas)</strong>
+                        <a href="https://wa.me/5546988220048" target="_blank" class="contact-link whatsapp-link">(46) 98822-0048</a>
+                        <p class="contact-description">Atendimento: Segunda a Sexta, das 8h às 18h (Horário de Brasília).</p>
+                    </li>
+
+                    <!-- Instagram -->
+                    <li>
+                        <strong>Instagram Oficial</strong>
+                        <a href="https://instagram.com/conecthubsistemas" target="_blank" class="contact-link instagram-link">@conecthubsistemas</a>
+                        <p class="contact-description">Acompanhe nossas novidades, tutoriais e dicas de gestão.</p>
+                    </li>
+
+                </ul>
+            </div>
+
+            <!-- Seção de Localização (Mantida) -->
+            <div class="content-section" style="margin-top: 40px;">
+                <h3>Nossa Base Operacional</h3>
+                <p>Dois Vizinhos, Paraná - CEP 85660-000</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="notification-container"></div>
+    <script type="module" src="js/alerta_global.js"></script>
+    <script type="module" src="js/alerta_global.js"></script>
+    <script type="module" src="js/darkmode.js"></script>
+</body>
+
+</html>

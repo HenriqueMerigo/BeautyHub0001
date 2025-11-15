@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>ModelHub</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo_ico.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="darkmode.js"></script>
+</head>
+
+
+<body>
+
+    <header>
+        <div class="header-left">
+            <a href="/mainpage.html">
+                <img src="img/minha_logo.png" alt="Meu Logotipo" class="logo_cabecalho">
+            </a>
+        </div>
+        <div class="header-right">
+            <div class="dark-mode-toggle" id="darkModeToggle" title="Alternar Modo Escuro">
+                <i class="fas fa-sun"></i> 
+            </div>
+            <h2>Visão Geral</h2> 
+            <nav>
+                <ul>
+                    <li><a href="mainpage.html">Início</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        
+        <div class="aba_esquerda">
+            <nav> 
+                <ul>
+                    <li><a href="abrir_item.html">📝 Abrir Item</a></li> 
+                    <li><a href="preparar_item.html">🔪 Preparar Item</a></li>
+                    <li><a href="compras.html">🛒 Compras</a></li>
+                    <li><a href="financeiro.html">💰 Financeiro</a></li>
+                    <li><a href="relatorios.html">📊 Relatórios</a></li> 
+                </ul>
+            </nav>
+        </div>
+
+        <div class="main-content">
+            
+            <h1>Visão Geral do Negócio</h1>
+
+            <section class="dashboard-section">
+                <h3>Status Operacional Agora</h3>
+                <div class="metrics-summary status-grid">
+                    
+                    <div class="metric-card primary">
+                        <div class="metric-icon"><i class="fas fa-money-bill-wave"></i></div>
+                        <div class="metric-details">
+                            <span class="metric-label">Faturamento de Hoje</span>
+                            <span class="metric-value" id="faturamentoHoje">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <!-- CORREÇÃO AQUI: Mudado o rótulo para refletir o que o JS está contando (Comandas Abertas) -->
+                    <div class="metric-card warning">
+                        <div class="metric-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="metric-details">
+                            <span class="metric-label">Comandas Abertas</span>
+                            <span class="metric-value" id="comandasAbertas">0</span>
+                        </div>
+                    </div>
+
+                    <!-- O ID é 'itensEmPreparo' e o label agora está alinhado com o nome do ID -->
+                    <div class="metric-card danger">
+                        <div class="metric-icon"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="metric-details">
+                            <span class="metric-label">Itens em Preparo</span>
+                            <span class="metric-value" id="itensEmPreparo">0</span>
+                        </div>
+                    </div>
+
+                    <div class="metric-card success">
+                        <div class="metric-icon"><i class="fas fa-concierge-bell"></i></div>
+                        <div class="metric-details">
+                            <span class="metric-label">Itens Prontos (Retirada)</span>
+                            <span class="metric-value" id="itensProntos">0</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            
+            <section class="dashboard-section">
+                <h3>Ações Principais</h3>
+                <div class="quick-actions-grid">
+                    
+                    <a href="abrir_item.html" class="quick-action-button new-order-color">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Abrir Nova Comanda</span>
+                    </a>
+                    
+                    <a href="preparar_item.html" class="quick-action-button kitchen-color">
+                        <i class="fas fa-utensils"></i>
+                        <span>Gestão de Produção</span>
+                    </a>
+                    
+                    <a href="financeiro.html" class="quick-action-button finance-color">
+                        <i class="fas fa-cash-register"></i>
+                        <span>Gestão Financeira</span>
+                    </a>
+
+                    <a href="relatorios.html" class="quick-action-button report-color">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Relatórios e Análises</span>
+                    </a>
+                </div>
+            </section>
+
+            <div class="content-section" style="border-left: 5px solid var(--warning-color);">
+                <h3>Avisos do Sistema</h3>
+                <p>Não há nenhum aviso no momento!</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="notification-container"></div>
+    <script type="module" src="js/alerta_global.js"></script>
+    <script type="module" src="js/darkmode.js"></script>
+    <script type="module" src="js/mainpage.js"></script>
+
+</body>
+
+</html>
