@@ -9,7 +9,7 @@
 // 2. O TIMESTAMP DEVE REPRESENTAR O PRIMEIRO INSTANTE (00:00:00) 
 //    DO DIA EM QUE A LICENÇA DEVE EXPIRAR.
 //
-const DATA_EXPIRACAO_TIMESTAMP = 1763002800000; //resultado da conversão do timestamp.py
+const DATA_EXPIRACAO_TIMESTAMP = 1767150000000; //resultado da conversão do timestamp.py
 // =========================================================
 
 /**

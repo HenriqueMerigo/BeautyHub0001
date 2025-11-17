@@ -3,29 +3,32 @@
 /* ========================================================================= */
 :root {
     /* Cores de Ação (FIXAS - Não mudam no Dark Mode) */
-    --primary-color: #1e88e5;       /* Azul Principal (Ação/Destaque) */
-    --secondary-color-fixed: #32465b; /* Azul/Cinza (Textos fortes, Números) */
-    --success-color: #2ecc71;       /* Verde */
-    --warning-color: #f39c12;       /* Laranja */
-    --danger-color: #e74c3c;        /* Vermelho */
-    --ready-color: #5a2222;         /* Ciano/Verde (Status Pronto) */
-    --secondary-color: #bd16bd;
+    --primary-color: #E3649E;      /* Rosa Pink Vibrante (Ação/Destaque) */
+    --secondary-color-fixed: #F8C6D9; /* Rosa Pastel Claro (Textos claros na sidebar escura) */
+    --success-color: #2ecc71;      /* Verde (FIXO) */
+    --warning-color: #f39c12;      /* Laranja (FIXO) */
+    --danger-color: #e74c3c;       /* Vermelho (FIXO) */
+    --ready-color: #7EC3A0;        /* Verde Menta Calmante (Status Pronto) */
+    --secondary-color: #D8A6B7;    /* Rosa Velho/Lavanda Claro */
     
     /* VARIÁVEIS DINÂMICAS (LIGHT MODE PADRÃO) */
-    --bg-page: #F0F0F0;             /* Fundo Claro da Página */
-    --bg-content: #ffffff;          /* Fundo Branco de Cards/Conteúdo */
-    --bg-header: var(--primary-color); /* Fundo do Header (Pode ser primary) */
-    --bg-header-left: #32465b;      /* Azul/Cinza do Header Left */
-    --bg-sidebar: #2b3b4c;          /* Azul/Cinza da Sidebar */
-    --bg-hover-sidebar: #476a3e;    /* Cor do Hover na Sidebar */
-    --text-primary: #333;           /* Cor Padrão do Texto Escuro */
-    --text-secondary: #555;         /* Cor para labels/dicas */
-    --text-light: #ffffff;          /* Cor Padrão do Texto Claro */
-    --border-color: #eee;           /* Cor de bordas/separadores leves */
+    --bg-page: #FBFBFB;            /* Fundo Quase Branco da Página (Limpo) */
+    --bg-content: #ffffff;         /* Fundo Branco de Cards/Conteúdo */
+    
+    /* VARIÁVEIS UNIFORMES (Header e Sidebar - Roxo Ameixa) */
+    --bg-header: #4A2044;          /* FUNDO DO HEADER (Uniforme: Roxo Ameixa Escuro) */
+    --bg-header-left: #4A2044;     /* FUNDO DO LOGO (Uniforme) */
+    --bg-sidebar: #4A2044;         /* FUNDO DA SIDEBAR (Uniforme) */
+
+    --bg-hover-sidebar: #66335C;   /* Cor do Hover na Sidebar (Feedback Sutil) */
+    --text-primary: #333;          /* Cor Padrão do Texto Escuro */
+    --text-secondary: #555;        /* Cor para labels/dicas */
+    --text-light: #F8C6D9;         /* Cor Padrão do Texto Claro (Rosa Pastel para contraste) */
+    --border-color: #EEDDEE;       /* Cor de bordas/separadores leves */
     --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra padrão */
     --shadow-strong: rgba(0, 0, 0, 0.2); /* Sombra forte */
-    --hover-bg-light: #f5f5f5;      /* Fundo de hover de tabela/card leve */
-    --alternate-row-background: #fcfcfc; /* Fundo alternativo mais leve para formulários/cards */
+    --hover-bg-light: #F0F0F0;     /* Fundo de hover de tabela/card leve */
+    --alternate-row-background: #F8F8F8; /* Fundo alternativo mais leve */
 
     /* Dimensões */
     --header-height: 80px;
@@ -35,20 +38,21 @@
 
 /* DARK MODE */
 body.dark-mode {
-    --bg-page: #121212;             /* Fundo Escuro da Página */
-    --bg-content: #1e1e1e;          /* Fundo Escuro de Cards/Conteúdo */
-    --bg-header: #1e1e1e;           /* Header mais escuro no DM */
-    --bg-header-left: #2c2c2c;      /* Header Left mais escuro */
-    --bg-sidebar: #2c2c2c;          /* Sidebar mais escura */
-    --bg-hover-sidebar: #444;       /* Cor do Hover na Sidebar */
-    --text-primary: #f4f4f4;        /* Texto principal claro */
-    --text-secondary: #b0b0b0;      /* Texto secundário/dica claro */
-    --text-light: #ffffff;          /* Cor Padrão do Texto Claro */
-    --border-color: #333;           /* Borda escura para separação */
-    --shadow-color: rgba(255, 255, 255, 0.05); /* Sombra mais sutil no DM */
+    /* Mantendo a cor primária (#E3649E) para destaque no DM */
+    --bg-page: #121212; 
+    --bg-content: #1e1e1e;
+    --bg-header: #2c2c2c; 
+    --bg-header-left: #2c2c2c;
+    --bg-sidebar: #2c2c2c; 
+    --bg-hover-sidebar: #444; 
+    --text-primary: #f4f4f4;
+    --text-secondary: #b0b0b0;
+    --text-light: #ffffff; 
+    --border-color: #333;
+    --shadow-color: rgba(255, 255, 255, 0.05);
     --shadow-strong: rgba(0, 0, 0, 0.4); 
-    --hover-bg-light: #262626;      /* Fundo de hover escuro */
-    --alternate-row-background: #232323; /* Fundo alternativo mais escuro para formulários/cards */
+    --hover-bg-light: #262626;
+    --alternate-row-background: #232323; 
 }
 
 

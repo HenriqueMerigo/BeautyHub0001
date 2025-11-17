@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "id": 1,
+    "data": "2025-11-14T14:38:24.883Z",
+    "status": "FECHADA",
+    "itens": [
+      {
+        "id": 1.1,
+        "nome": "Refrigerante 2L",
+        "quantidade": 3,
+        "preco": 5,
+        "precoUnitario": 5,
+        "statusItem": "ENTREGUE"
+      },
+      {
+        "id": 1.2,
+        "nome": "Suco Natural",
+        "quantidade": 2,
+        "preco": 8,
+        "precoUnitario": 8,
+        "statusItem": "ENTREGUE"
+      }
+    ],
+    "total": 31,
+    "mesa": "10",
+    "observacao": "",
+    "dataFechamento": "2025-11-14T14:38:24.883Z",
+    "formaPagamento": "Cartão"
+  },
+  {
+    "id": 2,
+    "data": "2025-11-15T14:38:24.883Z",
+    "status": "FECHADA",
+    "itens": [
+      {
+        "id": 2.1,
+        "nome": "Pizza Margherita",
+        "quantidade": 1,
+        "preco": 45,
+        "precoUnitario": 45,
+        "statusItem": "ENTREGUE"
+      },
+      {
+        "id": 2.2,
+        "nome": "Açaí",
+        "quantidade": 2,
+        "preco": 18,
+        "precoUnitario": 18,
+        "statusItem": "ENTREGUE"
+      }
+    ],
+    "total": 81,
+    "mesa": "03",
+    "observacao": "Com gelo",
+    "dataFechamento": "2025-11-15T14:38:24.883Z",
+    "formaPagamento": "Dinheiro"
+  }
+]
