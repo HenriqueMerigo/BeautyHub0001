@@ -82,11 +82,23 @@ function renderizarPedidos(comandas) {
     
     cozinhaGrid.innerHTML = ''; 
     
+    // 1. Filtrar comandas com itens pendentes (lógica mantida)
     const comandasComItensPendentes = comandas.filter(comanda => 
         comanda.itens.some(item => 
             item.statusItem === 'EM PREPARO' || item.statusItem === 'PRONTO'
         )
     );
+    
+    // 2. NOVA LÓGICA: Ordenar Agendamentos
+    // Ordena pelo ID do agendamento (comanda.mesa: DDMMAAAAHHMM)
+    // Usamos string comparison para garantir a ordem cronológica da data/hora.
+    comandasComItensPendentes.sort((a, b) => {
+        // Garantindo que a ordenação seja sempre do mais antigo para o mais recente
+        if (a.mesa < b.mesa) return -1;
+        if (a.mesa > b.mesa) return 1;
+        return 0;
+    });
+    // Se você quisesse do mais recente para o mais antigo, inverta -1 e 1.
 
     if (comandasComItensPendentes.length === 0) {
         cozinhaGrid.innerHTML = '<p>Nenhum pedido em preparo ou pronto no momento.</p>';
@@ -109,11 +121,30 @@ function renderizarPedidos(comandas) {
     });
 }
 
+/**
+ * Formata o ID do agendamento (DDMMAAAAHHMM) para exibição amigável.
+ * @param {string} agendamentoId O ID do agendamento no formato DDMMAAAAHHMM.
+ * @returns {string} Agendamento no formato "DD/MM/AAAA às HH:MM".
+ */
+function formatarIdAgendamentoParaExibicao(agendamentoId) {
+    if (!agendamentoId || typeof agendamentoId !== 'string' || agendamentoId.length !== 12) return 'N/A';
+    
+    // Supondo que a estrutura é DDMMAAAAHHMM (12 caracteres)
+    const dia = agendamentoId.substring(0, 2);
+    const mes = agendamentoId.substring(2, 4);
+    const ano = agendamentoId.substring(4, 8);
+    const hora = agendamentoId.substring(8, 10);
+    const minuto = agendamentoId.substring(10, 12);
+
+    return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+}
 
 function criarCardCozinha(comanda, itens) {
     const dataHora = new Date(comanda.data).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
     const itensEmPreparo = itens.filter(i => i.statusItem === 'EM PREPARO').length;
     
+    const agendamentoFormatado = formatarIdAgendamentoParaExibicao(comanda.mesa);
+
     let itensListHTML = '';
     itens.forEach(item => {
         const statusClass = item.statusItem === 'PRONTO' ? 'item-pronto' : 'item-em-preparo';
@@ -148,12 +179,12 @@ function criarCardCozinha(comanda, itens) {
     return `
         <div class="comanda-cozinha-card">
             <div class="card-header">
-                <h3>Comanda #${comanda.id}</h3>
-                <span class="mesa-info">Mesa ${comanda.mesa}</span>
+                <h3>Atendimento #${comanda.id}</h3>
+                <span class="mesa-info">Horário: ${agendamentoFormatado}</span>
             </div>
             <span class="time-info">Aberto às: ${dataHora}</span>
 
-            ${comanda.observacao ? `<div class="observacao">Obs: ${comanda.observacao}</div>` : ''}
+            ${comanda.observacao ? `<div class="observacao">Nome do Cliente: ${comanda.observacao}</div>` : ''}
 
             <div class="itens-container">
                 <h4>Itens Pendentes:</h4>
@@ -180,7 +211,7 @@ async function marcarComandaPronta(event) {
     
     const comandaId = button.getAttribute('data-comanda-id');
 
-    if (!confirm(`Confirma que todos os itens da Comanda #${comandaId} estão prontos para entrega?`)) {
+    if (!confirm(`Confirma que todos os itens do Atendimento #${comandaId} estão prontos para entrega?`)) {
         return;
     }
 
@@ -197,8 +228,8 @@ async function marcarComandaPronta(event) {
             const contentType = response.headers.get("content-type");
             if (contentType && contentType.includes("application/json")) {
                 const errorData = await response.json();
-                exibirAlerta(errorData.message || `Erro ao marcar comanda pronta: ${response.statusText}`, 'error');
-                throw new Error(errorData.message || `Erro ao marcar comanda pronta: ${response.statusText}`);
+                exibirAlerta(errorData.message || `Erro ao marcar atendimento pronto: ${response.statusText}`, 'error');
+                throw new Error(errorData.message || `Erro ao marcar atendimento pronto: ${response.statusText}`);
             } else {
                 exibirAlerta(`Erro de comunicação com o servidor: ${response.status}`, 'error');
                 throw new Error(`Erro de comunicação. Servidor retornou HTML em vez de JSON. Verifique se o servidor Node.js está rodando.`);
@@ -209,7 +240,7 @@ async function marcarComandaPronta(event) {
         carregarPedidosCozinha(); 
 
     } catch (error) {
-        console.error('Erro ao marcar comanda pronta:', error);
+        console.error('Erro ao marcar atendimento pronto:', error);
         // O alerta já foi disparado acima ou será disparado pelo throw
         // Removido o alert() nativo para usar o seu sistema de alertas
     } finally {

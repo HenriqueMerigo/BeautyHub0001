@@ -273,61 +273,6 @@ const writeCardapio = (cardapio) => {
     }
 };
 
-// =========================================================================
-// FUNÇÃO DE DADOS MOCK PARA INICIALIZAÇÃO DE RELATÓRIOS
-// =========================================================================
-/**
- * Adiciona dados de vendas fechadas ao iniciar o servidor, se comandas.json estiver vazio.
- */
-const generateMockVendas = () => {
-    const comandasAtuais = readComandas();
-    // Apenas simula dados se o arquivo de comandas estiver vazio
-    if (comandasAtuais.length > 0) return; 
-
-    console.log("Simulando dados de vendas iniciais para teste de relatórios...");
-
-    const hoje = new Date();
-    const dataFechamento = hoje.toISOString();
-    // Data de ontem para ter movimentação em dias diferentes
-    const dataOntem = new Date(hoje.setDate(hoje.getDate() - 1)).toISOString();
-
-    const mockComandas = [
-        // Venda 1: Categoria 'Bebida', Forma de Pagamento 'Cartão'
-        {
-            id: 1,
-            data: dataOntem,
-            status: 'FECHADA',
-            itens: [
-                { id: 1.1, nome: "Refrigerante 2L", quantidade: 3, preco: 5.00, precoUnitario: 5.00, statusItem: 'ENTREGUE' },
-                { id: 1.2, nome: "Suco Natural", quantidade: 2, preco: 8.00, precoUnitario: 8.00, statusItem: 'ENTREGUE' }
-            ],
-            total: (3 * 5.00) + (2 * 8.00), // 15.00 + 16.00 = 31.00
-            mesa: '10',
-            observacao: '',
-            dataFechamento: dataOntem,
-            formaPagamento: 'Cartão'
-        },
-        // Venda 2: Categoria 'Comida', Forma de Pagamento 'Dinheiro'
-        {
-            id: 2,
-            data: dataFechamento,
-            status: 'FECHADA',
-            itens: [
-                { id: 2.1, nome: "Pizza Margherita", quantidade: 1, preco: 45.00, precoUnitario: 45.00, statusItem: 'ENTREGUE' },
-                { id: 2.2, nome: "Açaí", quantidade: 2, preco: 18.00, precoUnitario: 18.00, statusItem: 'ENTREGUE' },
-            ],
-            total: 45.00 + (2 * 18.00), // 45.00 + 36.00 = 81.00
-            mesa: '03',
-            observacao: 'Com gelo',
-            dataFechamento: dataFechamento,
-            formaPagamento: 'Dinheiro'
-        }
-    ];
-
-    writeComandas(mockComandas);
-};
-// =========================================================================
-
 
 // =========================================================================
 // ROTAS DE SERVIÇO DE PÁGINAS HTML
@@ -964,13 +909,7 @@ const marcos = {
 };
 
 const server = app.listen(PORT, IP, () => { 
-    console.log(`Servidor da API Node.js rodando em ${BASE_URL}/mainpage.html`); 
-    
-    // =======================================================
-    // CHAMADA DA FUNÇÃO DE MOCK PARA POPULAR DADOS DE VENDAS
-    // SÓ ADICIONA VENDAS SE O ARQUIVO 'comandas.json' ESTIVER VAZIO
-    generateMockVendas(); 
-    // =======================================================
+    console.log(`Servidor da API Node.js rodando em ${BASE_URL}/mainpage.html`);
 
     setInterval(() => {
         uptimeSegundos += 1;

@@ -1,8 +1,8 @@
 // js/config.js (VERSÃO COMPLETA E ATUALIZADA)
 
 export const API_PORT = 5001; // PORTA DO BEAUTYHUB PADRAO 5000
-//export const IP = '172.16.103.153' // IP DA CISS
-export const IP = '192.168.1.17' // IP DE CASA 
+export const IP = '172.16.103.153' // IP DA CISS
+//export const IP = '192.168.1.17' // IP DE CASA 
 //export const IP = '172.30.4.49' // IP DA UTF
 
 export const BASE_URL = `http://${IP}:${API_PORT}`; // URL BASE DA API

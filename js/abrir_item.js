@@ -83,6 +83,35 @@ let itensSelecionados = [];
 // FUNÇÕES DE FLUXO PRINCIPAL
 // =========================================================================
 
+function formatarIdAgendamentoParaExibicao(idAgendamento) {
+    if (!idAgendamento || idAgendamento.length !== 12) return `ID Inválido (${idAgendamento})`;
+
+    const dia = idAgendamento.substring(0, 2);
+    const mes = idAgendamento.substring(2, 4);
+    const ano = idAgendamento.substring(4, 8);
+    const hora = idAgendamento.substring(8, 10);
+    const minuto = idAgendamento.substring(10, 12);
+
+    return `${dia}/${mes}/${ano} às ${hora}:${minuto}`;
+}
+
+/**
+ * Converte data (YYYY-MM-DD) e hora (HH:MM) para o formato DDMMAAAAHHMM.
+ * Ex: "2025-08-05", "08:30" => "050820250830"
+ */
+function gerarIdAgendamento(dataStr, horaStr) {
+    if (!dataStr || !horaStr) return null;
+
+    // Data: YYYY-MM-DD => DDMMAAAA
+    const [ano, mes, dia] = dataStr.split('-');
+    const dataPart = `${dia}${mes}${ano}`;
+
+    // Hora: HH:MM => HHMM
+    const horaPart = horaStr.replace(':', '');
+
+    return dataPart + horaPart;
+}
+
 /**
  * Inicia o fluxo para abrir uma NOVA comanda.
  */
@@ -90,7 +119,12 @@ function abrirFluxoNovaComanda() {
     // 1. Zera/Prepara o formulário da comanda
     document.getElementById('comandaIdInput').value = '';
     
-    if (document.getElementById('mesaInput')) document.getElementById('mesaInput').value = '00';
+    const dataInput = document.getElementById('dataAtendimentoInput');
+    const horaInput = document.getElementById('horaAtendimentoInput');
+
+    if (dataInput) dataInput.value = ''; // Limpa a data
+    if (horaInput) horaInput.value = ''; // Limpa a hora
+
     if (document.getElementById('observacaoInput')) document.getElementById('observacaoInput').value = '';
     if (totalComandaDisplay) totalComandaDisplay.textContent = 'R$ 0,00';
     if (tabelaItensComandaBody) tabelaItensComandaBody.innerHTML = '';
@@ -456,8 +490,14 @@ function adicionarItensAoResumo() {
 // =========================================================================
 async function salvarComanda() {
     const comandaId = document.getElementById('comandaIdInput')?.value; 
-    const mesa = document.getElementById('mesaInput')?.value;
     const observacao = document.getElementById('observacaoInput')?.value;
+
+    // NOVOS INPUTS DE DATA E HORA
+    const dataAtendimento = document.getElementById('dataAtendimentoInput')?.value;
+    const horaAtendimento = document.getElementById('horaAtendimentoInput')?.value;
+    
+    // GERA O NOVO ID DE ATENDIMENTO
+    const idAgendamento = gerarIdAgendamento(dataAtendimento, horaAtendimento);
     
     const itensParaSalvar = itensSelecionados
         .filter(item => item.quantidade > 0)
@@ -469,12 +509,12 @@ async function salvarComanda() {
         }));
         
     if (itensParaSalvar.length === 0) {
-        alert('A comanda deve ter pelo menos um item.');
+        alert('O atendimento deve ter pelo menos um item/serviço.');
         return;
     }
     
-    if (!comandaId && (!mesa || mesa.trim() === '')) {
-         alert('Por favor, informe o número da mesa para a nova comanda.');
+    if (!comandaId && !idAgendamento) {
+         alert('Por favor, informe a data e hora do atendimento.');
          return;
     }
     
@@ -487,23 +527,26 @@ async function salvarComanda() {
     if (comandaId) {
         method = 'PUT'; 
         url = `${API_URL}/${comandaId}/adicionar-itens`; 
-        successMessage = 'Itens adicionados à comanda com sucesso!';
+        successMessage = 'Itens/Serviços adicionados ao atendimento com sucesso!';
         
         payload = {
             itens: itensParaSalvar
         };
         
         if (observacao) payload.observacao = observacao;
-        if (mesa) payload.mesa = mesa;
+        
+        // Se estiver editando, não mude o ID/mesa existente
+        // Caso seu backend permita mudar a "mesa" em edição, adicione: payload.mesa = idAgendamento; 
         
     } else {
-        // 2. CRIAÇÃO (POST): Nova Comanda
+        // 2. CRIAÇÃO (POST): Novo Atendimento
         method = 'POST';
         url = API_URL;
-        successMessage = 'Comanda aberta com sucesso!';
+        successMessage = 'Atendimento marcado com sucesso!';
         
         payload = {
-            mesa: mesa,
+            // Mapeia o ID do Agendamento para o campo 'mesa' da API, mantendo a compatibilidade:
+            mesa: idAgendamento,
             observacao: observacao,
             itens: itensParaSalvar
         };
@@ -517,8 +560,9 @@ async function salvarComanda() {
         });
 
         if (!response.ok) {
+            // ... (Lógica de tratamento de erro mantida) ...
             const contentType = response.headers.get("content-type");
-            let errorMessage = `Erro ao salvar comanda. Status: ${response.status} (${response.statusText})`;
+            let errorMessage = `Erro ao salvar atendimento. Status: ${response.status} (${response.statusText})`;
             
             if (contentType && contentType.includes("application/json")) {
                 const error = await response.json().catch(() => ({ message: response.statusText }));
@@ -536,8 +580,8 @@ async function salvarComanda() {
         
         carregarComandasAbertas();
     } catch (error) {
-        console.error('Erro ao salvar comanda:', error);
-        alert(`Erro ao salvar comanda. Verifique o console. Detalhes: ${error.message}`);
+        console.error('Erro ao salvar atendimento:', error);
+        alert(`Erro ao salvar atendimento. Verifique o console. Detalhes: ${error.message}`);
     }
 }
 // =========================================================================
@@ -614,6 +658,10 @@ function criarCardComanda(comanda, statusClass) {
     let statusText = `Em Consumo (Fechamento)`;
     let statusTextColor = 'var(--primary-color)';
     
+    const agendamentoFormatado = formatarIdAgendamentoParaExibicao(comanda.mesa); // Usando a nova função
+    
+
+
     if (itensEmPreparo > 0) {
         statusText = `Preparando: ${itensEmPreparo} item(s)`;
         statusTextColor = 'var(--warning-color)';
@@ -627,19 +675,11 @@ function criarCardComanda(comanda, statusClass) {
     return `
         <div class="comanda-card ${statusClass}" data-id="${comanda.id}">
             <div class="comanda-header">
-                <span class="table-number">Mesa ${comanda.mesa} (#${comanda.id})</span>
+                <span class="table-number">Agendado para: ${agendamentoFormatado} (#${comanda.id})</span> 
                 <span class="waiter-info">${dataAbertura}</span>
             </div>
             <p class="status-text" style="color: ${statusTextColor}; font-weight: bold;">${statusText}</p>
-            <div class="comanda-details">
-                <div class="comanda-total">R$ ${total}</div>
-                <div class="card-actions">
-                    <button class="action-button btn-fechar-card" data-id="${comanda.id}" style="background-color: var(--danger-color); padding: 5px 10px;">
-                        Ver / Fechar
-                    </button>
-                </div>
             </div>
-        </div>
     `;
 }
 
@@ -671,29 +711,38 @@ function renderizarDetalhesComanda(comanda) {
     const comandaItensBody = document.getElementById('comandaItensBody');
     const resumoStatus = document.getElementById('comandaResumo');
     
+    // GERAÇÃO DO FORMATO DE EXIBIÇÃO
+    // comanda.mesa armazena o ID DDMMAAAAHHMM.
+    const agendamentoFormatado = formatarIdAgendamentoParaExibicao(comanda.mesa);
+
     const btnAdicionarItensModal = document.getElementById('btnAdicionarItensModal');
     const comandaIdInput = document.getElementById('comandaIdInput');
-    const mesaInput = document.getElementById('mesaInput');
-    const observacaoInput = document.getElementById('observacaoInput');
+    // ATENÇÃO: Os inputs de data e hora de EDIÇÃO precisam ser lidos aqui,
+    // mas não podemos preenchê-los com o ID DDMMAAAAHHMM.
+
+    // Apenas a observação é mantida para edição
+    const observacaoInput = document.getElementById('observacaoInput'); 
 
 
-    if (!modal || !comandaItensBody || !resumoStatus || !btnAdicionarItensModal || !comandaIdInput || !mesaInput || !observacaoInput) return;
+    // Verificação de elementos (Mantida)
+    if (!modal || !comandaItensBody || !resumoStatus || !btnAdicionarItensModal || !comandaIdInput || !observacaoInput) return;
     
-    document.getElementById('modalAcoesTitle').textContent = `Comanda #${comanda.id} - Mesa ${comanda.mesa}`;
+    // 1. ATUALIZAÇÃO DO TÍTULO DO MODAL: Mudar de "Mesa" para "Agendamento"
+    document.getElementById('modalAcoesTitle').textContent = `Atendimento #${comanda.id} - ${agendamentoFormatado.split(' ')[0]}`; // Exibe apenas a data no título para simplificar
+    
     document.getElementById('comandaTotalDisplay').textContent = comanda.total.toFixed(2).replace('.', ',');
     
     document.getElementById('btnFecharContaModal').setAttribute('data-id', comanda.id);
     
-    // Preenche o modal de edição de itens em segundo plano
+    // 2. PREENCHIMENTO DE EDIÇÃO (BACKGROUND):
     comandaIdInput.value = comanda.id;
-    mesaInput.value = comanda.mesa || '00';
+    // Removido: mesaInput.value = comanda.mesa || '00';
     observacaoInput.value = comanda.observacao || '';
     
     // Define o ID da comanda para a função de adicionar mais itens
     btnAdicionarItensModal.setAttribute('data-id', comanda.id);
     
     // Ao abrir o modal de detalhes, preenche itensSelecionados com itens não cancelados
-    // Isso é feito para que, ao clicar em "Adicionar/Editar Itens", os itens existentes já estejam na lista de seleção.
     itensSelecionados = comanda.itens
         .filter(item => item.statusItem !== 'CANCELADO')
         .map(item => ({
@@ -706,7 +755,6 @@ function renderizarDetalhesComanda(comanda) {
     comandaItensBody.innerHTML = '';
     
     comanda.itens.forEach(item => {
-        // NOVO: Calcular subtotal para cada item aqui
         const subtotal = item.quantidade * item.preco;
 
         const row = comandaItensBody.insertRow();
@@ -740,8 +788,9 @@ function renderizarDetalhesComanda(comanda) {
 
     let statusGeral = `Status: <span style="font-weight: bold; color: ${comanda.status === 'PRONTO' ? 'var(--ready-color)' : '#3498db'}">${comanda.status}</span>`;
     
+    // 3. ATUALIZAÇÃO DO RESUMO DE STATUS: Usar a variável formatada
     resumoStatus.innerHTML = `
-        <p>Mesa: <span class="detail-value-bold">${comanda.mesa}</span></p>
+        <p>Agendamento: <span class="detail-value-bold">${agendamentoFormatado}</span></p>
         <p>Abertura: <span class="detail-value-bold">${new Date(comanda.data).toLocaleString('pt-BR')}</span></p>
         <p>${statusGeral}</p>
     `;

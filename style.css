@@ -3,8 +3,8 @@
 /* ========================================================================= */
 :root {
     /* Cores de Ação (FIXAS - Não mudam no Dark Mode) */
-    --primary-color: #E3649E;      /* Rosa Pink Vibrante (Ação/Destaque) */
-    --secondary-color-fixed: #F8C6D9; /* Rosa Pastel Claro (Textos claros na sidebar escura) */
+    --primary-color: #e63383;      /* Rosa Pink Vibrante (Ação/Destaque) */
+    --secondary-color-fixed: #ff6aa3; /* Rosa Pastel Claro (Textos claros na sidebar escura) */
     --success-color: #2ecc71;      /* Verde (FIXO) */
     --warning-color: #f39c12;      /* Laranja (FIXO) */
     --danger-color: #e74c3c;       /* Vermelho (FIXO) */
@@ -12,18 +12,18 @@
     --secondary-color: #D8A6B7;    /* Rosa Velho/Lavanda Claro */
     
     /* VARIÁVEIS DINÂMICAS (LIGHT MODE PADRÃO) */
-    --bg-page: #FBFBFB;            /* Fundo Quase Branco da Página (Limpo) */
-    --bg-content: #ffffff;         /* Fundo Branco de Cards/Conteúdo */
+    --bg-page: #ffd6e6;            /* Fundo Quase Branco da Página (Limpo) */
+    --bg-content: #ffeaf2;         /* Fundo Branco de Cards/Conteúdo */
     
     /* VARIÁVEIS UNIFORMES (Header e Sidebar - Roxo Ameixa) */
-    --bg-header: #4A2044;          /* FUNDO DO HEADER (Uniforme: Roxo Ameixa Escuro) */
+    --bg-header: #e63383;          /* FUNDO DO HEADER (Uniforme: Roxo Ameixa Escuro) */
     --bg-header-left: #4A2044;     /* FUNDO DO LOGO (Uniforme) */
-    --bg-sidebar: #4A2044;         /* FUNDO DA SIDEBAR (Uniforme) */
+    --bg-sidebar: #662c5d;         /* FUNDO DA SIDEBAR (Uniforme) */
 
-    --bg-hover-sidebar: #66335C;   /* Cor do Hover na Sidebar (Feedback Sutil) */
+    --bg-hover-sidebar: #8a5d81;   /* Cor do Hover na Sidebar (Feedback Sutil) */
     --text-primary: #333;          /* Cor Padrão do Texto Escuro */
     --text-secondary: #555;        /* Cor para labels/dicas */
-    --text-light: #F8C6D9;         /* Cor Padrão do Texto Claro (Rosa Pastel para contraste) */
+    --text-light: #ffffff;         /* Cor Padrão do Texto Claro (Rosa Pastel para contraste) */
     --border-color: #EEDDEE;       /* Cor de bordas/separadores leves */
     --shadow-color: rgba(0, 0, 0, 0.1); /* Sombra padrão */
     --shadow-strong: rgba(0, 0, 0, 0.2); /* Sombra forte */
@@ -580,7 +580,7 @@ header {
 
 /* Mapeamento das Cores para os Botões */
 .quick-action-button.new-order-color { background-color: var(--primary-color); }
-.quick-action-button.kitchen-color { background-color: var(--secondary-color-fixed); }
+.quick-action-button.kitchen-color { background-color: var(--bg-sidebar); }
 .quick-action-button.finance-color { background-color: var(--success-color); }
 .quick-action-button.report-color { background-color: var(--warning-color); }
 

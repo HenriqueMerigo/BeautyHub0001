@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <title>ModelHub</title>
+    <title>BeautyHub</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="img/logo_ico.png">
@@ -22,7 +22,7 @@
             <div class="dark-mode-toggle" id="darkModeToggle" title="Alternar Modo Escuro">
                 <i class="fas fa-sun"></i> 
             </div>
-            <h2>Preparar Item</h2> 
+            <h2>Visão Geral</h2> 
             <nav>
                 <ul>
                     <li><a href="mainpage.html">Início</a></li>
@@ -38,8 +38,8 @@
         <div class="aba_esquerda">
             <nav> 
                 <ul>
-                    <li><a href="abrir_item.html">📝 Abrir Item</a></li> 
-                    <li class="active"><a href="preparar_item.html">🔪 Preparar Item</a></li>
+                    <li><a href="abrir_item.html">👤 Atendimentos</a></li> 
+                    <li class="active"><a href="preparar_item.html">📅 Agenda</a></li>
                     <li><a href="compras.html">🛒 Compras</a></li>
                     <li><a href="financeiro.html">💰 Financeiro</a></li>
                     <li><a href="relatorios.html">📊 Relatórios</a></li> 
@@ -49,14 +49,14 @@
 
         <div class="main-content">
             <div class="controls">
-                <h3>Comandas em Preparação</h3>
+                <h3>Atendimentos em Andamento</h3>
                 <button id="btnAcessarCardapio" class="action-button-primary" style="background-color: var(--secondary-color);">
-                    <i class="fas fa-utensils"></i> Gerenciar Cardápio
+                    <i class="fas fa-utensils"></i> Gerenciar Catálogo
                 </button>
             </div>
             
             <div class="kitchen-grid" id="cozinhaGrid">
-                <p>Carregando comandas...</p>
+                <p>Carregando atendimentos...</p>
             </div>
         </div>
 
@@ -65,7 +65,7 @@
     <div id="cardapioModal" class="modal">
         <div class="modal-content medium-modal">
             <div class="modal-header">
-                <h2>Gerenciamento de Cardápio</h2>
+                <h2>Gerenciamento de Catálogo</h2>
                 <button id="btnNovoItemCardapio" class="action-button-primary">
                     <i class="fas fa-plus"></i> Novo Item
                 </button>

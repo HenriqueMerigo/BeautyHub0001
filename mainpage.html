@@ -2,7 +2,7 @@
 <html lang="pt-br">
 
 <head>
-    <title>ModelHub</title>
+    <title>BeautyHub</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="img/logo_ico.png">
@@ -40,8 +40,8 @@
         <div class="aba_esquerda">
             <nav> 
                 <ul>
-                    <li><a href="abrir_item.html">📝 Abrir Item</a></li> 
-                    <li><a href="preparar_item.html">🔪 Preparar Item</a></li>
+                    <li><a href="abrir_item.html">👤 Atendimentos</a></li> 
+                    <li><a href="preparar_item.html">📅 Agenda</a></li>
                     <li><a href="compras.html">🛒 Compras</a></li>
                     <li><a href="financeiro.html">💰 Financeiro</a></li>
                     <li><a href="relatorios.html">📊 Relatórios</a></li> 
@@ -65,28 +65,27 @@
                         </div>
                     </div>
 
-                    <!-- CORREÇÃO AQUI: Mudado o rótulo para refletir o que o JS está contando (Comandas Abertas) -->
                     <div class="metric-card warning">
-                        <div class="metric-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="metric-icon"><i class="fas fa-person"></i></div>
                         <div class="metric-details">
-                            <span class="metric-label">Comandas Abertas</span>
+                            <span class="metric-label">Clientes Pendentes</span>
                             <span class="metric-value" id="comandasAbertas">0</span>
                         </div>
                     </div>
 
                     <!-- O ID é 'itensEmPreparo' e o label agora está alinhado com o nome do ID -->
                     <div class="metric-card danger">
-                        <div class="metric-icon"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="metric-icon"><i class="fa-solid fa-scissors"></i></div>
                         <div class="metric-details">
-                            <span class="metric-label">Itens em Preparo</span>
+                            <span class="metric-label">Pacotes em Andamento</span>
                             <span class="metric-value" id="itensEmPreparo">0</span>
                         </div>
                     </div>
 
                     <div class="metric-card success">
-                        <div class="metric-icon"><i class="fas fa-concierge-bell"></i></div>
+                        <div class="metric-icon"><i class="fas fa-hourglass-half"></i></div>
                         <div class="metric-details">
-                            <span class="metric-label">Itens Prontos (Retirada)</span>
+                            <span class="metric-label">Atendimentos em Andamento</span>
                             <span class="metric-value" id="itensProntos">0</span>
                         </div>
                     </div>
@@ -99,22 +98,22 @@
                 <div class="quick-actions-grid">
                     
                     <a href="abrir_item.html" class="quick-action-button new-order-color">
-                        <i class="fas fa-plus-circle"></i>
-                        <span>Abrir Nova Comanda</span>
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Agendar Atendimento</span>
                     </a>
                     
                     <a href="preparar_item.html" class="quick-action-button kitchen-color">
-                        <i class="fas fa-utensils"></i>
-                        <span>Gestão de Produção</span>
+                        <i class="fas fa-user-clock"></i>
+                        <span>Consultar Agenda</span>
                     </a>
                     
                     <a href="financeiro.html" class="quick-action-button finance-color">
-                        <i class="fas fa-cash-register"></i>
+                        <i class="fas fa-dollar-sign"></i>
                         <span>Gestão Financeira</span>
                     </a>
 
                     <a href="relatorios.html" class="quick-action-button report-color">
-                        <i class="fas fa-chart-bar"></i>
+                        <i class="fas fa-chart-pie"></i>
                         <span>Relatórios e Análises</span>
                     </a>
                 </div>
