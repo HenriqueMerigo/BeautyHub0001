@@ -976,4 +976,7 @@ header {
     margin: 0; /* Remove margem extra */
 }
 
-/* Fim das Melhorias de Compras */
+#observacaoInput {
+    width: 100%; /* Faz o input ocupar 100% da largura do seu elemento pai (a div.form-group) */
+    box-sizing: border-box; /* Garante que padding e border sejam incluídos dentro da largura de 100% */
+}

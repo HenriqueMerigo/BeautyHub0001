@@ -1,54 +1,35 @@
 id;nome;preco;categoria
-1;Salada Padrão;10,00;Entradas
-2;Tábua de Frios;35,00;Entradas
-3;Bruschetta Italiana;22,00;Entradas
-4;Caldo de Mandioca com Bacon;18,00;Entradas
-5;Cestinha de Pão de Alho;15,00;Entradas
-6;Pastelzinho de Carne (6 unid.);20,00;Entradas
-7;Picanha na Chapa com Acom.;89,00;Pratos Principais
-8;Filé de Frango Grelhado com Arroz e Salada;42,00;Pratos Principais
-9;Strogonoff de Carne;45,00;Pratos Principais
-10;Tilápia Grelhada com Legumes;48,00;Pratos Principais
-11;Risoto de Camarão;56,00;Pratos Principais
-12;Lasanha à Bolonhesa;44,00;Pratos Principais
-13;Parmegiana de Frango;47,00;Pratos Principais
-14;Feijoada Completa (individual);52,00;Pratos Principais
-15;Batata Frita;25,00;Porções
-16;Batata com Queijo e Bacon;32,00;Porções
-17;Iscas de Frango Empanadas;36,00;Porções
-18;Anéis de Lula à Dorê;49,00;Porções
-19;Porção de Picanha Fatiada;75,00;Porções
-20;Torresmo Crocante;29,00;Porções
-21;Polenta Frita;23,00;Porções
-22;Arroz Branco;8,00;Adicionais
-23;Farofa;7,00;Adicionais
-24;Vinagrete;6,00;Adicionais
-25;Queijo Ralado;5,00;Adicionais
-26;Molho Especial da Casa;4,00;Adicionais
-27;Ovo Frito;4,00;Adicionais
-28;Petit Gateau;22,00;Sobremesas
-29;Pudim de Leite Condensado;14,00;Sobremesas
-30;Mousse de Maracujá;12,00;Sobremesas
-31;Taça de Sorvete com Calda;16,00;Sobremesas
-32;Brownie com Sorvete;20,00;Sobremesas
-33;Torta de Limão;15,00;Sobremesas
-34;Caipirinha de Limão;18,00;Drinks
-35;Caipiroska de Morango;22,00;Drinks
-36;Gin Tônica Clássico;26,00;Drinks
-37;Mojito;24,00;Drinks
-38;Piña Colada;25,00;Drinks
-39;Margarita;23,00;Drinks
-40;Sex on the Beach;25,00;Drinks
-41;Whisky com Gelo;30,00;Drinks
-42;Tequila Shot;18,00;Drinks
-43;Cuba Libre;22,00;Drinks
-44;Água Mineral sem Gás;5,00;Bebidas
-45;Água Mineral com Gás;6,00;Bebidas
-46;Refrigerante Lata;7,00;Bebidas
-47;Suco Natural (Laranja, Abacaxi ou Limão);10,00;Bebidas
-48;Energético;15,00;Bebidas
-49;Cerveja Long Neck;12,00;Bebidas
-50;Cerveja 600ml;18,00;Bebidas
-51;Cerveja Artesanal;22,00;Bebidas
-52;Café Expresso;6,00;Bebidas
-53;Prato Teste;100,00;Pratos
+1;Corte Feminino (Básico);60,00;Cabelo: Corte
+2;Corte Masculino (Máquina);40,00;Cabelo: Corte
+3;Corte Infantil;35,00;Cabelo: Corte
+4;Lavagem e Secagem;30,00;Cabelo: Corte
+5;Coloração Raiz;120,00;Cabelo: Cor/Química
+6;Mechas (Cabelo Curto);180,00;Cabelo: Cor/Química
+7;Luzes (Cabelo Longo);250,00;Cabelo: Cor/Química
+8;Alisamento Progressiva;300,00;Cabelo: Cor/Química
+9;Hidratação Profunda;80,00;Cabelo: Tratamento
+10;Cauterização Capilar;100,00;Cabelo: Tratamento
+11;Reconstrução Kérastase;150,00;Cabelo: Tratamento
+12;Manicure Simples;30,00;Manicure/Pedicure
+13;Pedicure Simples;35,00;Manicure/Pedicure
+14;Esmaltação em Gel (Mão);50,00;Manicure/Pedicure
+15;Alongamento de Unhas (Fibra);150,00;Manicure/Pedicure
+16;Limpeza de Pele Profunda;110,00;Estética Facial
+17;Peeling Químico;180,00;Estética Facial
+18;Design de Sobrancelhas;45,00;Estética Facial
+19;Micropigmentação Labial;450,00;Estética Facial
+20;Massagem Relaxante (1h);120,00;Estética Corporal
+21;Drenagem Linfática;90,00;Estética Corporal
+22;Massagem Modeladora;110,00;Estética Corporal
+23;Depilação Axila (Cera);35,00;Depilação
+24;Depilação Meia Perna (Cera);55,00;Depilação
+25;Depilação Virilha Completa (Cera);70,00;Depilação
+26;Sessão de Laser (Axila);80,00;Depilação
+27;Maquiagem Social;130,00;Maquiagem/Penteado
+28;Penteado (Festa/Coque);100,00;Maquiagem/Penteado
+29;Maquiagem e Penteado para Noiva;600,00;Maquiagem/Penteado
+30;Pacote Padrão (Manicure + Pedicure + Sobrancelha);95,00;Pacotes/Promos
+31;Pacote Dia da Noiva (Completo);1200,00;Pacotes/Promos
+32;Shampoo Profissional (Revenda);55,00;Venda de Produtos
+33;Esmalte Importado;35,00;Venda de Produtos
+34;Kit Tratamento Home Care;180,00;Venda de Produtos

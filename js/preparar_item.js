@@ -101,7 +101,7 @@ function renderizarPedidos(comandas) {
     // Se você quisesse do mais recente para o mais antigo, inverta -1 e 1.
 
     if (comandasComItensPendentes.length === 0) {
-        cozinhaGrid.innerHTML = '<p>Nenhum pedido em preparo ou pronto no momento.</p>';
+        cozinhaGrid.innerHTML = '<p>Nenhum atendimento agendado.</p>';
         return;
     }
 

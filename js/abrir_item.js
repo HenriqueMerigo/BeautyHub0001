@@ -59,13 +59,16 @@ const CARDAPIO_API_URL = URL_API_CARDAPIO;
 
 // CATEGORIAS FIXAS PARA O DROPDOWN (GARANTE ORDEM E CONSISTÊNCIA)
 const CATEGORIAS_FIXAS = [
-    'entradas', 
-    'pratos principais', 
-    'porções', 
-    'adicionais', 
-    'sobremesas', 
-    'drinks', 
-    'bebidas'
+    'cabelo: corte', 
+    'cabelo: cor/química', 
+    'cabelo: tratamento', 
+    'manicure/pedicure', 
+    'estética facial', 
+    'estética corporal', 
+    'depilação',
+    'maquiagem/penteado', 
+    'pacotes/promos',
+    'venda de produtos'
 ];
 const FALLBACK_CATEGORY = 'Geral'; 
 
@@ -611,7 +614,7 @@ function renderizarComandas(comandas) {
     comandasGrid.innerHTML = '';
     
     if (comandas.length === 0) {
-        comandasGrid.innerHTML = '<p>Nenhuma comanda aberta no momento.</p>';
+        comandasGrid.innerHTML = '<p>Nenhum agendamento marcado.</p>';
         return;
     }
 
