@@ -53,34 +53,32 @@
             
             <h1>Geração de Relatórios</h1>
             
-            <div class="content-section">
-                <h3>Configuração do Relatório</h3>
-                
-                <div class="controls">
-                    
-                    <label for="tipoRelatorio">Tipo de Relatório:</label>
-                    <select id="tipoRelatorio" class="control-select" style="max-width: 250px;">
-                        <option value="vendas_categoria">Vendas por Categoria</option>
-                        <option value="top_itens_vendidos">Top 10 Itens Vendidos</option>
-                        <option value="movimentacao_horaria">Movimentação Horária</option>
-                        <option value="compras_total">Total de Compras</option>
-                        <option value="compras_por_fornecedor">Compras por Fornecedor</option>
-                    </select>
+            <div class="controls">
+                <label for="tipoRelatorio">Tipo de Relatório:</label>
+                <select id="tipoRelatorio" class="control-select" style="width: 250px;">
+                    <option value="vendas_categoria">Vendas por Categoria</option>
+                    <option value="top_itens_vendidos">Top 10 Itens Vendidos</option>
+                    <option value="movimentacao_horaria">Movimentação Horária</option>
+                    <option value="compras_total">Total de Compras</option>
+                    <option value="compras_por_fornecedor">Compras por Fornecedor</option>
+                </select>
 
-                    <label for="filtroDataInicial">De:</label>
-                    <input type="date" id="filtroDataInicial" class="control-select">
-
-                    <label for="filtroDataFinal">Até:</label>
-                    <input type="date" id="filtroDataFinal" class="control-select">
-                    
-                    <button id="btnGerarRelatorio" class="action-button" style="background-color: var(--primary-color);">
-                        Gerar Relatório
-                    </button>
-                    
-                    <button id="btnExportarRelatorio" class="action-button" style="background-color: var(--success-color);">
-                        Exportar CSV
-                    </button>
+                <div class="filter-group-inline">
+                    <label for="dataInicial">De:</label>
+                    <input type="date" id="dataInicial" class="control-select">
                 </div>
+
+                <div class="filter-group-inline">
+                    <label for="dataFinal">Até:</label>
+                    <input type="date" id="dataFinal" class="control-select">
+                </div>
+
+                <button id="btnGerarRelatorio" class="action-button-primary">
+                    Gerar Relatório
+                </button>
+                <button id="btnExportarCSV" class="action-button-success">
+                    Exportar CSV
+                </button>
             </div>
 
             <div class="content-section" id="relatorio-resultados" style="min-height: 400px;">

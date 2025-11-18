@@ -103,7 +103,7 @@ async function carregarTransacoes() {
                     id: `R-${comandaId}`, 
                     idOriginal: comandaId, 
                     data: mov.dataFechamento || mov.data, 
-                    descricao: `Comanda #${comandaId || 'N/A'} (Mesa ${mov.mesa || '00'}) - ${mov.formaPagamento || 'Pix'}`, 
+                    descricao: `Atendimento #${comandaId || 'N/A'} (ID do Agendamento ${mov.mesa || '00'}) - ${mov.formaPagamento || 'Pix'}`, 
                     valor: valor,
                     tipo: 'Receita',
                     status: mov.status || 'FECHADA'

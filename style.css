@@ -1002,3 +1002,4 @@ header {
     width: auto; /* Deixa o campo se ajustar ao conteúdo, mas limitado pelo min-width: 150px do .control-select */
     min-width: 130px; /* Um pouco menor para caber melhor na linha */
 }
+
