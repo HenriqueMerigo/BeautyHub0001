@@ -82,11 +82,18 @@
                 <div class="controls filters-row">
                     <select id="filtroCompraFornecedor" class="control-select" style="width: 200px;">
                         <option value="">Todos os Fornecedores</option>
-                        </select>
-                    <label for="filtroCompraDataInicial">De:</label>
-                    <input type="date" id="filtroCompraDataInicial" class="control-select">
-                    <label for="filtroCompraDataFinal">Até:</label>
-                    <input type="date" id="filtroCompraDataFinal" class="control-select">
+                    </select>
+                    
+                    <div class="filter-group-inline">
+                        <label for="filtroCompraDataInicial">De:</label>
+                        <input type="date" id="filtroCompraDataInicial" class="control-select">
+                    </div>
+                    
+                    <div class="filter-group-inline">
+                        <label for="filtroCompraDataFinal">Até:</label>
+                        <input type="date" id="filtroCompraDataFinal" class="control-select">
+                    </div>
+                    
                     <button id="btnFiltrarCompras" class="action-button-secondary">
                         <i class="fas fa-filter"></i> Filtrar
                     </button>
@@ -161,34 +168,41 @@
     </div>
 
     <div id="modalCompra" class="modal">
-        <div class="modal-content small-modal">
+        <div class="modal-content medium-modal"> 
             <div class="modal-header">
                 <h2 id="modalCompraTitle">Nova Compra</h2>
-                </div>
+            </div>
 
             <div class="modal-body">
                 <form id="formCompra" class="form-improved"> 
                     <input type="hidden" id="compraId">
+                    
                     <div class="form-group">
                         <label for="compraFornecedor">Fornecedor:</label>
                         <select id="compraFornecedor" class="control-select" required>
-                            </select>
+                        </select>
                     </div>
+                    
                     <div class="form-group">
                         <label for="compraData">Data da Compra:</label>
                         <input type="date" id="compraData" required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="compraDescricao">Descrição dos Itens:</label>
-                        <textarea id="compraDescricao" class="fixed-textarea" rows="4"></textarea>
+                        <textarea id="compraDescricao" rows="3" placeholder="Ex: 5 Shampoos
+    2 Caixas de Luvas M
+    ..." required></textarea>
                     </div>
+                    
                     <div class="form-group">
                         <label for="compraTotal">Total da Compra (R$):</label>
-                        <input type="number" id="compraTotal" step="0.01" required>
+                        <input type="number" id="compraTotal" step="0.01" placeholder="0,00" required>
                     </div>
+                    
                     <div class="form-group">
                         <label for="compraObservacoes">Observações:</label>
-                        <textarea id="compraObservacoes" class="fixed-textarea" rows="2"></textarea>
+                        <textarea id="compraObservacoes" rows="2" placeholder="Notas importantes sobre a compra ou prazo de entrega"></textarea>
                     </div>
                     
                     <div class="modal-actions button-group">

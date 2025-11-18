@@ -338,6 +338,7 @@ header {
     font-weight: 500;
     color: var(--text-secondary); /* Cor secundária */
 }
+/* INÍCIO DO AJUSTE DE LARGURA PARA FIXAR O TAMANHO DO FORMULÁRIO */
 .controls input[type="text"],
 .controls input[type="date"],
 .control-select,
@@ -351,9 +352,17 @@ header {
     box-sizing: border-box;
     background-color: var(--bg-content); /* Garante fundo correto no DM */
     color: var(--text-primary);
-    max-width: 100%; /* Garante responsividade em telas pequenas */
-    min-width: 150px; /* Evita que fique muito pequeno */
+    max-width: 100%; 
+    min-width: 150px; 
+    
+    /* * NOVO: Garante que os campos dentro do modal (incluindo o textarea) 
+     * usem toda a largura disponível no contêiner (.form-group), que já 
+     * é limitado pelo .small-modal (max-width: 500px).
+     */
+    width: 100%;
 }
+/* FIM DO AJUSTE DE LARGURA */
+
 
 /* Base para todos os botões de Ação */
 .action-button, button {
@@ -979,4 +988,17 @@ header {
 #observacaoInput {
     width: 100%; /* Faz o input ocupar 100% da largura do seu elemento pai (a div.form-group) */
     box-sizing: border-box; /* Garante que padding e border sejam incluídos dentro da largura de 100% */
+}
+
+/* --- Novo Estilo para Alinhamento Inline de Filtros (Data) --- */
+.filter-group-inline {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espaço entre o label (De/Até) e o campo de data */
+}
+
+/* Garante que os campos de data e select sejam um pouco mais compactos nesse contexto */
+.filter-group-inline .control-select {
+    width: auto; /* Deixa o campo se ajustar ao conteúdo, mas limitado pelo min-width: 150px do .control-select */
+    min-width: 130px; /* Um pouco menor para caber melhor na linha */
 }
